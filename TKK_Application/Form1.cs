@@ -7,12 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Ports;
+
 
 namespace TKK_Application
 {
     public partial class TKK : Form
     {
         private Parametri_skenera param_skenera;
+
+        SerialPort _serialPort;
+
+
         public TKK()
         {
             InitializeComponent();
@@ -23,5 +29,12 @@ namespace TKK_Application
             param_skenera = new Parametri_skenera();
             param_skenera.Show();
         }
+
+        void Init_scanner_connection()
+        {
+
+
+        }
+
     }
 }

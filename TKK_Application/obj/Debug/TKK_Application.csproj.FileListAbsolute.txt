@@ -8,3 +8,26 @@ G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Applicati
 G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.exe
 G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.pdb
 G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.csprojResolveAssemblyReference.cache
+\\VBOXSVR\Visual_studio_projekti\TKK\TKK_Application\bin\Debug\TKK_Application.exe.config
+\\VBOXSVR\Visual_studio_projekti\TKK\TKK_Application\obj\Debug\TKK_Application.exe
+\\VBOXSVR\Visual_studio_projekti\TKK\TKK_Application\obj\Debug\TKK_Application.pdb
+\\VBOXSVR\Visual_studio_projekti\TKK\TKK_Application\bin\Debug\TKK_Application.exe
+\\VBOXSVR\Visual_studio_projekti\TKK\TKK_Application\bin\Debug\TKK_Application.pdb
+\\VBOXSVR\Visual_studio_projekti\TKK\TKK_Application\obj\Debug\TKK_Application.csprojResolveAssemblyReference.cache
+\\VBOXSVR\Visual_studio_projekti\TKK\TKK_Application\obj\Debug\TKK_Application.TKK.resources
+\\VBOXSVR\Visual_studio_projekti\TKK\TKK_Application\obj\Debug\TKK_Application.Parametri_skenera.resources
+\\VBOXSVR\Visual_studio_projekti\TKK\TKK_Application\obj\Debug\TKK_Application.Properties.Resources.resources
+\\VBOXSVR\Visual_studio_projekti\TKK\TKK_Application\obj\Debug\TKK_Application.csproj.GenerateResource.Cache
+L:\TKK\TKK_Application\bin\Debug\TKK_Application.exe.config
+L:\TKK\TKK_Application\obj\Debug\TKK_Application.exe
+L:\TKK\TKK_Application\obj\Debug\TKK_Application.pdb
+K:\TKK\TKK_Application\bin\Debug\TKK_Application.exe.config
+K:\TKK\TKK_Application\obj\Debug\TKK_Application.exe
+K:\TKK\TKK_Application\obj\Debug\TKK_Application.pdb
+K:\TKK\TKK_Application\obj\Debug\TKK_Application.csprojResolveAssemblyReference.cache
+K:\TKK\TKK_Application\obj\Debug\TKK_Application.TKK.resources
+K:\TKK\TKK_Application\obj\Debug\TKK_Application.Parametri_skenera.resources
+K:\TKK\TKK_Application\obj\Debug\TKK_Application.Properties.Resources.resources
+K:\TKK\TKK_Application\obj\Debug\TKK_Application.csproj.GenerateResource.Cache
+K:\TKK\TKK_Application\bin\Debug\TKK_Application.exe
+K:\TKK\TKK_Application\bin\Debug\TKK_Application.pdb
