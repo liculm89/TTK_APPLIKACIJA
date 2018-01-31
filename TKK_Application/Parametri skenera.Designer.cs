@@ -35,6 +35,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.connectScanner = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // com_combobox
@@ -99,11 +101,29 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "label6";
             // 
+            // connectScanner
+            // 
+            this.connectScanner.Location = new System.Drawing.Point(77, 215);
+            this.connectScanner.Name = "connectScanner";
+            this.connectScanner.Size = new System.Drawing.Size(164, 31);
+            this.connectScanner.TabIndex = 7;
+            this.connectScanner.Text = "Test konekcije";
+            this.connectScanner.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(77, 253);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(164, 20);
+            this.textBox1.TabIndex = 8;
+            // 
             // Parametri_skenera
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 258);
+            this.ClientSize = new System.Drawing.Size(312, 314);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.connectScanner);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -128,5 +148,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button connectScanner;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
