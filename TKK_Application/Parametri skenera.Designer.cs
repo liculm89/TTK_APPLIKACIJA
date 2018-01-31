@@ -37,6 +37,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.connectScanner = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // com_combobox
@@ -68,7 +69,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(77, 97);
+            this.label3.Location = new System.Drawing.Point(80, 97);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 3;
@@ -95,7 +96,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(77, 173);
+            this.label6.Location = new System.Drawing.Point(85, 183);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 6;
@@ -109,19 +110,30 @@
             this.connectScanner.TabIndex = 7;
             this.connectScanner.Text = "Test konekcije";
             this.connectScanner.UseVisualStyleBackColor = true;
+            this.connectScanner.Click += new System.EventHandler(this.connectScanner_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(77, 253);
+            this.textBox1.Location = new System.Drawing.Point(77, 273);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(164, 20);
             this.textBox1.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(77, 253);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(64, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Očitani kod:";
             // 
             // Parametri_skenera
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(312, 314);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.connectScanner);
             this.Controls.Add(this.label6);
@@ -133,6 +145,7 @@
             this.Controls.Add(this.com_combobox);
             this.Name = "Parametri_skenera";
             this.Text = "Parametri_skenera";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Parametri_skenera_FormClosing);
             this.Load += new System.EventHandler(this.Parametri_skenera_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -150,5 +163,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button connectScanner;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label7;
     }
 }

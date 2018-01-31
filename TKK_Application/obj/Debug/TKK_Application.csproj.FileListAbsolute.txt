@@ -31,3 +31,5 @@ K:\TKK\TKK_Application\obj\Debug\TKK_Application.Properties.Resources.resources
 K:\TKK\TKK_Application\obj\Debug\TKK_Application.csproj.GenerateResource.Cache
 K:\TKK\TKK_Application\bin\Debug\TKK_Application.exe
 K:\TKK\TKK_Application\bin\Debug\TKK_Application.pdb
+G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\Automation.BDaq4.dll
+G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\Automation.BDaq4.Design.dll

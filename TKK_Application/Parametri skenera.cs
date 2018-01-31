@@ -10,13 +10,18 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Management;
 using System.IO.Ports;
-
+using System.Threading;
+using Automation.BDaq;
 
 namespace TKK_Application
 {
     public partial class Parametri_skenera : Form
     {
         SerialPort _serialPort;
+
+
+        private delegate void SetTextDeleg(string text);
+
 
         public Parametri_skenera()
         {
@@ -43,5 +48,46 @@ namespace TKK_Application
 
             //Console.ReadLine();
         }
+
+        private void connectScanner_Click(object sender, EventArgs e)
+        {
+            _serialPort = new SerialPort("COM5", 9600, Parity.None, 8, StopBits.One);
+            _serialPort.Handshake = Handshake.RequestToSend;
+            _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
+            _serialPort.ReadTimeout = 110;
+            _serialPort.WriteTimeout = 110;
+            //_serialPort.DtrEnable = true;
+            _serialPort.Open();
+            if (_serialPort.IsOpen)
+            {
+                Console.WriteLine("Port open");
+            }
+        }
+
+        void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+
+            Thread.Sleep(110);
+            Console.WriteLine("Press any key to continue...");
+            string data = _serialPort.ReadExisting().ToString();
+            Console.WriteLine(data);
+
+            this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
+        }
+
+        private void si_DataReceived(string data)
+        {
+            textBox1.Text = data.Trim();
+        }
+
+        private void Parametri_skenera_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_serialPort.IsOpen)
+            {
+                _serialPort.Close();
+                Console.WriteLine("Port closed");
+            }
+        }
+
     }
 }

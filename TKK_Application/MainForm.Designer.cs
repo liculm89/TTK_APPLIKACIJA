@@ -28,9 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TKK));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.postavkeSkeneraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.postavkeSkeneraToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.instantDoCtrl1 = new Automation.BDaq.InstantDoCtrl(this.components);
+            this.instantDiCtrl1 = new Automation.BDaq.InstantDiCtrl(this.components);
+            this.DO1_btn = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,11 +66,38 @@
             this.postavkeSkeneraToolStripMenuItem1.Text = "Parametri skenera";
             this.postavkeSkeneraToolStripMenuItem1.Click += new System.EventHandler(this.postavkeSkeneraToolStripMenuItem1_Click);
             // 
+            // instantDoCtrl1
+            // 
+            this.instantDoCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("instantDoCtrl1._StateStream")));
+            // 
+            // instantDiCtrl1
+            // 
+            this.instantDiCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("instantDiCtrl1._StateStream")));
+            // 
+            // DO1_btn
+            // 
+            this.DO1_btn.Location = new System.Drawing.Point(102, 144);
+            this.DO1_btn.Name = "DO1_btn";
+            this.DO1_btn.Size = new System.Drawing.Size(59, 41);
+            this.DO1_btn.TabIndex = 1;
+            this.DO1_btn.Text = "DO1";
+            this.DO1_btn.UseVisualStyleBackColor = true;
+            this.DO1_btn.Click += new System.EventHandler(this.DO1_btn_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(102, 118);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 2;
+            // 
             // TKK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 441);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.DO1_btn);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "TKK";
@@ -73,13 +107,18 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
+    }
 
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem postavkeSkeneraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem postavkeSkeneraToolStripMenuItem1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Automation.BDaq.InstantDoCtrl instantDoCtrl1;
+        private Automation.BDaq.InstantDiCtrl instantDiCtrl1;
+        private System.Windows.Forms.Button DO1_btn;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

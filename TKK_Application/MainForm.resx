@@ -120,4 +120,33 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>132, 17</value>
+  </metadata>
+  <metadata name="instantDoCtrl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>296, 17</value>
+  </metadata>
+  <data name="instantDoCtrl1._StateStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFNBdXRvbWF0aW9uLkJEYXE0LCBWZXJzaW9uPTQuMC4wLjAsIEN1
+        bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49NDYzZjU5MjhkNjAxODNhMAUBAAAAI0F1dG9tYXRp
+        b24uQkRhcS5EZXZpY2VTdGF0ZVN0cmVhbWVyBQAAAAxEZXZpY2VOdW1iZXILRGVzY3JpcHRpb24KRGV2
+        aWNlTW9kZQtNb2R1bGVJbmRleAlQcm9kdWN0SUQAAgAABAgICBlBdXRvbWF0aW9uLkJEYXEuUHJvZHVj
+        dElkAgAAAAIAAAD/////CgEAAAAAAAAABf3///8ZQXV0b21hdGlvbi5CRGFxLlByb2R1Y3RJZAEAAAAH
+        dmFsdWVfXwAIAgAAAAASsSIL
+</value>
+  </data>
+  <metadata name="instantDiCtrl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>426, 17</value>
+  </metadata>
+  <data name="instantDiCtrl1._StateStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFNBdXRvbWF0aW9uLkJEYXE0LCBWZXJzaW9uPTQuMC4wLjAsIEN1
+        bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49NDYzZjU5MjhkNjAxODNhMAUBAAAAI0F1dG9tYXRp
+        b24uQkRhcS5EZXZpY2VTdGF0ZVN0cmVhbWVyBQAAAAxEZXZpY2VOdW1iZXILRGVzY3JpcHRpb24KRGV2
+        aWNlTW9kZQtNb2R1bGVJbmRleAlQcm9kdWN0SUQAAgAABAgICBlBdXRvbWF0aW9uLkJEYXEuUHJvZHVj
+        dElkAgAAAAIAAAD/////CgEAAAAAAAAABf3///8ZQXV0b21hdGlvbi5CRGFxLlByb2R1Y3RJZAEAAAAH
+        dmFsdWVfXwAIAgAAAAAjsSIL
+</value>
+  </data>
 </root>
