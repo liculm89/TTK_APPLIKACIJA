@@ -8,24 +8,73 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
+using System.IO;
 using Automation.BDaq;
-
+using System.Threading;
+using Microsoft.VisualBasic.FileIO;
 
 namespace TKK_Application
 {
     public partial class TKK : Form
     {
         private Parametri_skenera param_skenera;
+        private StatusIO _statusIO;
+        private string csvFileLoc;
 
-        SerialPort _serialPort;
+        private SerialPort _serialPort;
         private Label[] m_portNum;
         private Label[] m_portHex;
+
+        public DataTable dt = new DataTable();
+
+        private delegate void SetTextDeleg(string text);
+
 
         public TKK()
         {
             InitializeComponent();
             instantDoCtrl1.SelectedDevice = new DeviceInformation(0);
             instantDiCtrl1.SelectedDevice = new DeviceInformation(0);
+
+            csvFileLoc = @"G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Res\Programi.csv";
+          
+            #region Datagrid
+
+            dt.Columns.Add("ID", typeof(string));
+            dt.Columns.Add("BARCODE", typeof(string));
+            dt.Columns.Add("SMJER", typeof(string));
+
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            //dataGridView1.Columns[0].Width = 25;
+            //dataGridView1.Columns[1].Width = 80;
+            //dataGridView1.Columns[2].Width = 50;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.MultiSelect = false;
+            dataGridView1.DataSource = dt;
+            dataGridView1.ReadOnly = true;
+            //dataGridView1.Columns[0].Width = 25;
+
+
+            if (File.Exists(csvFileLoc))
+            {
+                string delimiter = ";";
+                readCsv(csvFileLoc, delimiter);
+            }
+
+            #endregion Datagrid
+
+            _serialPort = new SerialPort("COM5", 9600, Parity.None, 8, StopBits.One);
+            _serialPort.Handshake = Handshake.RequestToSend;
+            _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
+            _serialPort.ReadTimeout = 110;
+            _serialPort.WriteTimeout = 110;
+            //_serialPort.DtrEnable = true;
+            //_serialPort.Open();
+
+            if (!(_serialPort.IsOpen))
+            {
+                scannerStatus.Text = "Scanner is not connected...";
+            }
 
             if (!instantDoCtrl1.Initialized)
             {
@@ -40,8 +89,13 @@ namespace TKK_Application
                 this.Close();
                 return;
             }
+            InitializePortState();
+            timer1.Start();
+        }
 
-
+        private void populate(string id, string barcode, string smjerRot)
+        {
+            dataGridView1.Rows.Add(id, barcode, smjerRot);
         }
 
         private void postavkeSkeneraToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -50,17 +104,13 @@ namespace TKK_Application
             param_skenera.Show();
         }
 
-        void Init_scanner_connection()
-        {
-
-        }
-
         private void InitializePortState()
         {
             byte portData = 0;
             byte portDir = 0xFF;
             ErrorCode err = ErrorCode.Success;
             byte[] mask = instantDoCtrl1.Features.DoDataMask;
+            
             for (int i = 0; (i + ConstVal.StartPort) < instantDoCtrl1.Features.PortCount && i < ConstVal.PortCountShow; ++i)
             {
                 err = instantDoCtrl1.Read(i + ConstVal.StartPort, out portData);
@@ -70,8 +120,8 @@ namespace TKK_Application
                     return;
                 }
 
-                m_portNum[i].Text = (i + ConstVal.StartPort).ToString();
-                m_portHex[i].Text = portData.ToString("X2");
+                //m_portNum[i].Text = (i + ConstVal.StartPort).ToString();
+                //m_portHex[i].Text = portData.ToString("X2");
 
                 if (instantDoCtrl1.Ports != null)
                 {
@@ -186,5 +236,141 @@ namespace TKK_Application
                 HandleError(err);
             }
         }
+
+        private void statusIOModulaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _statusIO = new StatusIO(0);
+            _statusIO.Show();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = DateTime.Now.ToString("MM-dd-yyyy h:mmtt:ss");
+        }
+
+
+        private void csvSelectFile_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string directoryPath = Path.GetDirectoryName(openFileDialog1.FileName);
+                string filename = System.IO.Path.GetFileName(openFileDialog1.FileName);
+                Console.WriteLine(directoryPath +"\\" + filename);
+                csvFileLoc = "'" + directoryPath + "\\" + filename + "'";
+
+                csvFileLoc = Path.Combine(directoryPath, filename);
+               // Console.WriteLine(csvFileLoc);
+                string delimiter = ";";
+                readCsv(csvFileLoc, delimiter);            
+
+            }
+        }
+
+        private void readCsv(string fileName, string delimiters)
+        {
+            using (TextFieldParser tfp = new TextFieldParser(fileName))
+            {
+                tfp.SetDelimiters(delimiters);
+
+                if (!tfp.EndOfData)
+                {
+                    string[] fields = tfp.ReadFields();
+                }
+
+                while (!tfp.EndOfData)
+                    dt.Rows.Add(tfp.ReadFields());
+            }
+      
+        }
+
+        private void scannedCode_TextChanged(object sender, EventArgs e)
+        {
+            string searchValue = "Z25060C2557L647";
+
+            searchValue = scannedCode.Text;
+            
+            int rowIndex = -1;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                try
+                {
+                    if (row.Cells[1].Value.ToString().Equals(searchValue))
+                    {
+                        rowIndex = row.Index;
+                        break;
+                    }
+                }
+                catch { }
+            }
+
+            if (rowIndex != -1)
+            {
+                dataGridView1.Rows[rowIndex].Selected = true;
+            }
+  
+           /* string columnName = "BARCODE";
+
+            string rowFilter = string.Format("[{0}] = '{1}'", columnName, searchValue);
+            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = rowFilter;*/
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (csvFileLoc != null)
+            {
+                string delimiter = ";";
+                readCsv(csvFileLoc, delimiter);
+                (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = null;
+            }
+
+            return;
+        }
+
+        #region Scanner
+
+        private void connScanner_Click(object sender, EventArgs e)
+        {
+            Init_scanner_connection();
+        }
+
+        void Init_scanner_connection()
+        {
+
+            if (_serialPort.IsOpen)
+            {
+                //Console.WriteLine("Port is open");
+                _serialPort.Close();
+                scannerStatus.Text = "Scanner disconnected.";
+            }
+            else
+            {
+                try
+                {
+                    _serialPort.Open();
+                    Console.WriteLine("Port opened");
+                    scannerStatus.Text = "Scanner is connected.";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error opening port: " + ex.Message);
+                }
+            }
+        }
+
+        void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            Thread.Sleep(110);
+            Console.WriteLine("Press any key to continue...");
+            string data = _serialPort.ReadExisting().ToString();
+            //Console.WriteLine(data);
+            this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
+        }
+
+        private void si_DataReceived(string data)
+        {
+            scannedCode.Text = ("");
+            scannedCode.Text = data.Trim();
+        }
+        #endregion Scanner
     }
 }

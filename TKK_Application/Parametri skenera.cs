@@ -17,7 +17,7 @@ namespace TKK_Application
 {
     public partial class Parametri_skenera : Form
     {
-        SerialPort _serialPort;
+        public SerialPort _serialPort;
 
 
         private delegate void SetTextDeleg(string text);
@@ -57,10 +57,19 @@ namespace TKK_Application
             _serialPort.ReadTimeout = 110;
             _serialPort.WriteTimeout = 110;
             //_serialPort.DtrEnable = true;
-            _serialPort.Open();
+           // _serialPort.Open();
             if (_serialPort.IsOpen)
             {
                 Console.WriteLine("Port open");
+            }
+            else
+            {
+                try
+                {
+                    _serialPort.Open();
+                    Console.WriteLine("Port opened");
+                }
+                catch { }
             }
         }
 
@@ -71,7 +80,6 @@ namespace TKK_Application
             Console.WriteLine("Press any key to continue...");
             string data = _serialPort.ReadExisting().ToString();
             Console.WriteLine(data);
-
             this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
         }
 
@@ -82,11 +90,16 @@ namespace TKK_Application
 
         private void Parametri_skenera_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_serialPort.IsOpen)
+            try
             {
                 _serialPort.Close();
                 Console.WriteLine("Port closed");
             }
+            catch
+            {
+                Console.WriteLine("no port is open");
+            }
+
         }
 
     }
