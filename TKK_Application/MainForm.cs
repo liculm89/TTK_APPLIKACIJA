@@ -33,9 +33,6 @@ namespace TKK_Application
         public TKK()
         {
             InitializeComponent();
-            instantDoCtrl1.SelectedDevice = new DeviceInformation(0);
-            instantDiCtrl1.SelectedDevice = new DeviceInformation(0);
-
             csvFileLoc = @"G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Res\Programi.csv";
           
             #region Datagrid
@@ -45,15 +42,10 @@ namespace TKK_Application
             dt.Columns.Add("SMJER", typeof(string));
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            //dataGridView1.Columns[0].Width = 25;
-            //dataGridView1.Columns[1].Width = 80;
-            //dataGridView1.Columns[2].Width = 50;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
             dataGridView1.DataSource = dt;
             dataGridView1.ReadOnly = true;
-            //dataGridView1.Columns[0].Width = 25;
-
 
             if (File.Exists(csvFileLoc))
             {
@@ -63,18 +55,23 @@ namespace TKK_Application
 
             #endregion Datagrid
 
+            #region ScannerInit
             _serialPort = new SerialPort("COM5", 9600, Parity.None, 8, StopBits.One);
             _serialPort.Handshake = Handshake.RequestToSend;
             _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
             _serialPort.ReadTimeout = 110;
             _serialPort.WriteTimeout = 110;
             //_serialPort.DtrEnable = true;
-            //_serialPort.Open();
 
             if (!(_serialPort.IsOpen))
             {
                 scannerStatus.Text = "Scanner is not connected...";
             }
+            #endregion ScannerInit
+
+            #region IOModul
+            instantDoCtrl1.SelectedDevice = new DeviceInformation(0);
+            instantDiCtrl1.SelectedDevice = new DeviceInformation(0);
 
             if (!instantDoCtrl1.Initialized)
             {
@@ -91,11 +88,7 @@ namespace TKK_Application
             }
             InitializePortState();
             timer1.Start();
-        }
-
-        private void populate(string id, string barcode, string smjerRot)
-        {
-            dataGridView1.Rows.Add(id, barcode, smjerRot);
+            #endregion IOModul
         }
 
         private void postavkeSkeneraToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -103,6 +96,8 @@ namespace TKK_Application
             param_skenera = new Parametri_skenera();
             param_skenera.Show();
         }
+
+        #region IOMethods
 
         private void InitializePortState()
         {
@@ -237,6 +232,8 @@ namespace TKK_Application
             }
         }
 
+        #endregion IOMethods
+
         private void statusIOModulaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _statusIO = new StatusIO(0);
@@ -248,6 +245,12 @@ namespace TKK_Application
             toolStripStatusLabel1.Text = DateTime.Now.ToString("MM-dd-yyyy h:mmtt:ss");
         }
 
+        #region datagridMethods
+
+        private void populate(string id, string barcode, string smjerRot)
+        {
+            dataGridView1.Rows.Add(id, barcode, smjerRot);
+        }
 
         private void csvSelectFile_Click(object sender, EventArgs e)
         {
@@ -285,9 +288,9 @@ namespace TKK_Application
 
         private void scannedCode_TextChanged(object sender, EventArgs e)
         {
-            string searchValue = "Z25060C2557L647";
+            string searchValue = scannedCode.Text;
 
-            searchValue = scannedCode.Text;
+            //searchValue = scannedCode.Text;
             
             int rowIndex = -1;
             foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -325,6 +328,36 @@ namespace TKK_Application
 
             return;
         }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
+                int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+
+                DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+
+                string a = Convert.ToString(selectedRow.Cells["SMJER"].Value);
+
+                Console.WriteLine(a);
+
+                if (a == "1")
+                {
+                    rotationLabel.Text = "CW";
+                }
+                else if (a == "2")
+
+                {
+                    rotationLabel.Text = "CCW";
+                }
+                else
+                {
+                    rotationLabel.Text = "Error";
+                }
+            }
+        }
+
+        #endregion datagridMehtods
 
         #region Scanner
 
@@ -372,5 +405,6 @@ namespace TKK_Application
             scannedCode.Text = data.Trim();
         }
         #endregion Scanner
+
     }
 }
