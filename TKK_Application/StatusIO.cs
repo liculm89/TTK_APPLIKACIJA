@@ -101,6 +101,7 @@ namespace TKK_Application
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            #region Inputs
             byte portData = 0;
             ErrorCode err = ErrorCode.Success;
 
@@ -124,6 +125,51 @@ namespace TKK_Application
                     m_pictrueBox[i, j].Invalidate();
                 }
             }
+            #endregion Inputs
+
+            #region Output
+            byte portDataOutput = 0;
+            byte portDir = 0xFF;
+            ErrorCode errOutput = ErrorCode.Success;
+            byte[] mask = instantDoCtrl1.Features.DoDataMask;
+            for (int i = 0; (i + ConstVal.StartPort) < instantDoCtrl1.Features.PortCount && i < ConstVal.PortCountShow; ++i)
+            {
+                errOutput = instantDoCtrl1.Read(i + ConstVal.StartPort, out portDataOutput);
+                if (errOutput != ErrorCode.Success)
+                {
+                    HandleError(errOutput);
+                    return;
+                }
+
+                m_portNumOutput[i].Text = (i + ConstVal.StartPort).ToString();
+                m_portHexOutput[i].Text = portDataOutput.ToString("X2");
+
+                if (instantDoCtrl1.Ports != null)
+                {
+                    portDir = (byte)instantDoCtrl1.Ports[i + ConstVal.StartPort].DirectionMask;
+                }
+
+                // Set picture box state
+                for (int j = 0; j < 8; ++j)
+                {
+                    if (((portDir >> j) & 0x1) == 0 || ((mask[i] >> j) & 0x1) == 0)  // Bit direction is input.
+                    {
+                        m_pictrueBoxOutput[i, j].Image = imageList2.Images[2];
+                        m_pictrueBoxOutput[i, j].Enabled = false;
+                    }
+                    else
+                    {
+                        m_pictrueBoxOutput[i, j].Click += new EventHandler(OutputButton_Click);
+                        m_pictrueBoxOutput[i, j].Tag = new DoBitInformation((portDataOutput >> j) & 0x1, i + ConstVal.StartPort, j);
+                        m_pictrueBoxOutput[i, j].Image = imageList2.Images[(portDataOutput >> j) & 0x1];
+                    }
+                    m_pictrueBoxOutput[i, j].Invalidate();
+                }
+            }
+
+
+            #endregion Output
+
         }
 
         private void InitOutputState()

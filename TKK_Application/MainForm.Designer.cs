@@ -30,26 +30,28 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TKK));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.postavkeSkeneraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.postavkeSkeneraToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusIOModulaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.instantDoCtrl1 = new Automation.BDaq.InstantDoCtrl(this.components);
             this.instantDiCtrl1 = new Automation.BDaq.InstantDiCtrl(this.components);
             this.DO1_btn = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.statusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusIOModulaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.scannerStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.rotationLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.csvSelectFile = new System.Windows.Forms.Button();
@@ -59,17 +61,17 @@
             this.connScanner = new System.Windows.Forms.Button();
             this.startAuto = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.rotationLabel = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.label7 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -98,6 +100,21 @@
             this.postavkeSkeneraToolStripMenuItem1.Text = "Parametri skenera";
             this.postavkeSkeneraToolStripMenuItem1.Click += new System.EventHandler(this.postavkeSkeneraToolStripMenuItem1_Click);
             // 
+            // statusToolStripMenuItem
+            // 
+            this.statusToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusIOModulaToolStripMenuItem});
+            this.statusToolStripMenuItem.Name = "statusToolStripMenuItem";
+            this.statusToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.statusToolStripMenuItem.Text = "Status";
+            // 
+            // statusIOModulaToolStripMenuItem
+            // 
+            this.statusIOModulaToolStripMenuItem.Name = "statusIOModulaToolStripMenuItem";
+            this.statusIOModulaToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.statusIOModulaToolStripMenuItem.Text = "Status I/O modula";
+            this.statusIOModulaToolStripMenuItem.Click += new System.EventHandler(this.statusIOModulaToolStripMenuItem_Click);
+            // 
             // instantDoCtrl1
             // 
             this.instantDoCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("instantDoCtrl1._StateStream")));
@@ -123,21 +140,6 @@
             this.textBox1.Size = new System.Drawing.Size(41, 20);
             this.textBox1.TabIndex = 2;
             // 
-            // statusToolStripMenuItem
-            // 
-            this.statusToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusIOModulaToolStripMenuItem});
-            this.statusToolStripMenuItem.Name = "statusToolStripMenuItem";
-            this.statusToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
-            this.statusToolStripMenuItem.Text = "Status";
-            // 
-            // statusIOModulaToolStripMenuItem
-            // 
-            this.statusIOModulaToolStripMenuItem.Name = "statusIOModulaToolStripMenuItem";
-            this.statusIOModulaToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.statusIOModulaToolStripMenuItem.Text = "Status I/O modula";
-            this.statusIOModulaToolStripMenuItem.Click += new System.EventHandler(this.statusIOModulaToolStripMenuItem_Click);
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -155,10 +157,6 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 19);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // scannerStatus
             // 
             this.scannerStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
@@ -166,6 +164,10 @@
             this.scannerStatus.Name = "scannerStatus";
             this.scannerStatus.Size = new System.Drawing.Size(122, 19);
             this.scannerStatus.Text = "toolStripStatusLabel2";
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // panel1
             // 
@@ -185,6 +187,60 @@
             this.panel1.Size = new System.Drawing.Size(310, 559);
             this.panel1.TabIndex = 4;
             // 
+            // rotationLabel
+            // 
+            this.rotationLabel.AutoSize = true;
+            this.rotationLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rotationLabel.Location = new System.Drawing.Point(245, 393);
+            this.rotationLabel.Name = "rotationLabel";
+            this.rotationLabel.Size = new System.Drawing.Size(2, 22);
+            this.rotationLabel.TabIndex = 6;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(23, 393);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(216, 20);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Odabrani smjer vrtnje motora:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(23, 193);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 20);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "READY";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(23, 80);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 20);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "READY";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 158);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(125, 20);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "SEPARATOR 2.";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "SEPARATOR 1.";
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -197,48 +253,14 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 42);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "SEPARATOR 1.";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 158);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 20);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "SEPARATOR 2.";
-            // 
             // dataGridView1
             // 
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(22, 56);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
-            this.dataGridView1.Size = new System.Drawing.Size(370, 260);
+            this.dataGridView1.Size = new System.Drawing.Size(402, 422);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -248,9 +270,7 @@
             // 
             // csvSelectFile
             // 
-            this.csvSelectFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.csvSelectFile.Location = new System.Drawing.Point(22, 323);
+            this.csvSelectFile.Location = new System.Drawing.Point(22, 492);
             this.csvSelectFile.Name = "csvSelectFile";
             this.csvSelectFile.Size = new System.Drawing.Size(179, 47);
             this.csvSelectFile.TabIndex = 6;
@@ -260,7 +280,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(200, 323);
+            this.button1.Location = new System.Drawing.Point(200, 492);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(192, 47);
             this.button1.TabIndex = 7;
@@ -298,39 +318,23 @@
             // 
             // startAuto
             // 
-            this.startAuto.Location = new System.Drawing.Point(12, 56);
+            this.startAuto.Location = new System.Drawing.Point(12, 31);
             this.startAuto.Name = "startAuto";
-            this.startAuto.Size = new System.Drawing.Size(196, 58);
+            this.startAuto.Size = new System.Drawing.Size(139, 44);
             this.startAuto.TabIndex = 11;
             this.startAuto.Text = "START AUTO CIKLUSA";
             this.startAuto.UseVisualStyleBackColor = true;
+            this.startAuto.Click += new System.EventHandler(this.startAuto_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 120);
+            this.button2.Location = new System.Drawing.Point(157, 31);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(196, 58);
+            this.button2.Size = new System.Drawing.Size(146, 44);
             this.button2.TabIndex = 12;
             this.button2.Text = "STOP AUTO CIKLUSA";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 80);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 20);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "READY";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 193);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 20);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "READY";
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // panel2
             // 
@@ -343,35 +347,45 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.scannedCode);
             this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel2.Location = new System.Drawing.Point(381, 0);
+            this.panel2.Location = new System.Drawing.Point(341, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(411, 373);
+            this.panel2.Size = new System.Drawing.Size(451, 559);
             this.panel2.TabIndex = 13;
             // 
-            // label6
+            // pictureBox2
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(23, 393);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(216, 20);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Odabrani smjer vrtnje motora:";
+            this.pictureBox2.Location = new System.Drawing.Point(101, 123);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 14;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // rotationLabel
+            // imageList1
             // 
-            this.rotationLabel.AutoSize = true;
-            this.rotationLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rotationLabel.Location = new System.Drawing.Point(245, 393);
-            this.rotationLabel.Name = "rotationLabel";
-            this.rotationLabel.Size = new System.Drawing.Size(53, 22);
-            this.rotationLabel.TabIndex = 6;
-            this.rotationLabel.Text = "label7";
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "glossy-darkgray-button-md.png");
+            this.imageList1.Images.SetKeyName(1, "glossy-green-button-md.png");
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label7.Location = new System.Drawing.Point(85, 95);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(155, 25);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "START AUTO";
             // 
             // TKK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1105, 586);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.startAuto);
@@ -395,6 +409,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,6 +449,9 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label rotationLabel;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Label label7;
     }
 }
 

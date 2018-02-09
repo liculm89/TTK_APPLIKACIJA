@@ -26,14 +26,12 @@ namespace TKK_Application
         private Label[] m_portHex;
 
         public DataTable dt = new DataTable();
-
         private delegate void SetTextDeleg(string text);
-
 
         public TKK()
         {
             InitializeComponent();
-            csvFileLoc = @"G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Res\Programi.csv";
+            csvFileLoc = @"D:\N046_17 DOKUMENTACIJA I PROGRAM\Res\Programi.csv";
           
             #region Datagrid
 
@@ -63,6 +61,8 @@ namespace TKK_Application
             _serialPort.WriteTimeout = 110;
             //_serialPort.DtrEnable = true;
 
+            Init_scanner_connection();
+
             if (!(_serialPort.IsOpen))
             {
                 scannerStatus.Text = "Scanner is not connected...";
@@ -70,8 +70,8 @@ namespace TKK_Application
             #endregion ScannerInit
 
             #region IOModul
-            instantDoCtrl1.SelectedDevice = new DeviceInformation(0);
-            instantDiCtrl1.SelectedDevice = new DeviceInformation(0);
+            instantDoCtrl1.SelectedDevice = new DeviceInformation(1);
+            instantDiCtrl1.SelectedDevice = new DeviceInformation(1);
 
             if (!instantDoCtrl1.Initialized)
             {
@@ -88,7 +88,31 @@ namespace TKK_Application
             }
             InitializePortState();
             timer1.Start();
+
+            instantDiCtrl1.ChangeOfState += new EventHandler<DiSnapEventArgs>(DInputChanged);
+            instantDiCtrl1.Interrupt += new EventHandler<DiSnapEventArgs>(instantDiCtrl_Interrupt);
+
+           /* if (!instantDiCtrl1.Features.DiCosintSupported)
+            {
+                Console.WriteLine("The device can not support DI status change interrupt function.");
+                return;
+            }
+            */
+            if (!instantDiCtrl1.Features.DiintSupported)
+            {
+                Console.WriteLine("The device can not support DI interrupt function.");
+                return;
+            }
+
+            DiintChannel[] interruptChans = instantDiCtrl1.DiintChannels;
+            interruptChans[0].Enabled = true;
+      
+            instantDiCtrl1.SnapStart();
+            timer1.Start();
+
             #endregion IOModul
+
+            pictureBox2.Image = imageList1.Images[0];
         }
 
         private void postavkeSkeneraToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -98,6 +122,16 @@ namespace TKK_Application
         }
 
         #region IOMethods
+
+        public void instantDiCtrl_Interrupt(object sender, DiSnapEventArgs e)
+        {
+            Console.WriteLine("\n DI port {0} status change interrupt occurred!", e.SrcNum);
+        }
+
+        public void DInputChanged(object sender, DiSnapEventArgs e)
+        {
+            Console.WriteLine("\n DI port {0} status change interrupt occurred!", e.SrcNum);
+        }
 
         private void InitializePortState()
         {
@@ -236,7 +270,7 @@ namespace TKK_Application
 
         private void statusIOModulaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _statusIO = new StatusIO(0);
+            _statusIO = new StatusIO(1);
             _statusIO.Show();
         }
 
@@ -265,7 +299,6 @@ namespace TKK_Application
                // Console.WriteLine(csvFileLoc);
                 string delimiter = ";";
                 readCsv(csvFileLoc, delimiter);            
-
             }
         }
 
@@ -319,13 +352,14 @@ namespace TKK_Application
 
         private void button1_Click(object sender, EventArgs e)
         {
+            dt.Clear();
             if (csvFileLoc != null)
             {
                 string delimiter = ";";
                 readCsv(csvFileLoc, delimiter);
                 (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = null;
             }
-
+            
             return;
         }
 
@@ -368,7 +402,6 @@ namespace TKK_Application
 
         void Init_scanner_connection()
         {
-
             if (_serialPort.IsOpen)
             {
                 //Console.WriteLine("Port is open");
@@ -406,5 +439,28 @@ namespace TKK_Application
         }
         #endregion Scanner
 
+        private void startAuto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("Auto start clicked");
+
+            pictureBox2.Image = imageList1.Images[1];
+            /*if (pictureBox2.Image == imageList1.Images[0])
+            {
+                pictureBox2.Image = imageList1.Images[1];
+            }
+            else {
+                pictureBox2.Image = imageList1.Images[0];
+            }*/
+        }
     }
 }

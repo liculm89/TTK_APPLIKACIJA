@@ -46,6 +46,8 @@ namespace TKK_Application
                 Console.WriteLine(port);
             }
 
+            com_combobox.SelectedIndex = com_combobox.FindString("COM5");
+
             //Console.ReadLine();
         }
 

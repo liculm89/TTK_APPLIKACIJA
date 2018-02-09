@@ -34,3 +34,16 @@ K:\TKK\TKK_Application\bin\Debug\TKK_Application.pdb
 G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\Automation.BDaq4.dll
 G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\Automation.BDaq4.Design.dll
 G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.StatusIO.resources
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\TKK_Application.exe.config
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.exe
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.pdb
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\TKK_Application.exe
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\TKK_Application.pdb
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\Automation.BDaq4.Design.dll
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\Automation.BDaq4.dll
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.csprojResolveAssemblyReference.cache
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.TKK.resources
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.Parametri_skenera.resources
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.Properties.Resources.resources
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.StatusIO.resources
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.csproj.GenerateResource.Cache
