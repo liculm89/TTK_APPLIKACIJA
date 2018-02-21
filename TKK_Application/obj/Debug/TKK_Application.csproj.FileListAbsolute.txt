@@ -47,3 +47,7 @@ D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\ob
 D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.Properties.Resources.resources
 D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.StatusIO.resources
 D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.csproj.GenerateResource.Cache
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\TKK_Application.exe.manifest
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\TKK_Application.application
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.exe.manifest
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.application

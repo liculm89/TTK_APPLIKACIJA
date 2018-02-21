@@ -46,14 +46,14 @@ namespace TKK_Application
                 Console.WriteLine(port);
             }
 
-            com_combobox.SelectedIndex = com_combobox.FindString("COM5");
+            com_combobox.SelectedIndex = com_combobox.FindString("COM6");
 
             //Console.ReadLine();
         }
 
         private void connectScanner_Click(object sender, EventArgs e)
         {
-            _serialPort = new SerialPort("COM5", 9600, Parity.None, 8, StopBits.One);
+            _serialPort = new SerialPort("COM6", 9600, Parity.None, 8, StopBits.One);
             _serialPort.Handshake = Handshake.RequestToSend;
             _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
             _serialPort.ReadTimeout = 110;

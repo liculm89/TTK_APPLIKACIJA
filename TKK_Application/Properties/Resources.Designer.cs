@@ -63,9 +63,9 @@ namespace TKK_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap botonrojooscuro_md {
+        internal static System.Drawing.Bitmap glossy_darkgray_button_2400px {
             get {
-                object obj = ResourceManager.GetObject("botonrojooscuro_md", resourceCulture);
+                object obj = ResourceManager.GetObject("glossy_darkgray_button_2400px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace TKK_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap glossy_darkgray_button_md {
+        internal static System.Drawing.Bitmap glossy_green_button_2400px {
             get {
-                object obj = ResourceManager.GetObject("glossy_darkgray_button_md", resourceCulture);
+                object obj = ResourceManager.GetObject("glossy_green_button_2400px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace TKK_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap glossy_green_button_md {
+        internal static System.Drawing.Bitmap glossy_red_button_2400px {
             get {
-                object obj = ResourceManager.GetObject("glossy_green_button_md", resourceCulture);
+                object obj = ResourceManager.GetObject("glossy_red_button_2400px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace TKK_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap green_button_md {
+        internal static System.Drawing.Bitmap glossy_red_button_2400px_2_ {
             get {
-                object obj = ResourceManager.GetObject("green_button_md", resourceCulture);
+                object obj = ResourceManager.GetObject("glossy_red_button_2400px_2_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace TKK_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap green_dot {
+        internal static System.Drawing.Bitmap glossy_yellow_button_2400px {
             get {
-                object obj = ResourceManager.GetObject("green_dot", resourceCulture);
+                object obj = ResourceManager.GetObject("glossy_yellow_button_2400px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -116,6 +116,16 @@ namespace TKK_Application.Properties {
         internal static System.Drawing.Bitmap green_dot1 {
             get {
                 object obj = ResourceManager.GetObject("green_dot1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap molumen_red_round_error_warning_icon_2400px {
+            get {
+                object obj = ResourceManager.GetObject("molumen_red_round_error_warning_icon_2400px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

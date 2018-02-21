@@ -42,6 +42,9 @@ namespace TKK_Application
             //Initialize digital outputs
             instantDoCtrl1.SelectedDevice = new DeviceInformation(deviceNumber);
 
+           // string profileLoc= @"D:\N046_17 DOKUMENTACIJA I PROGRAM\Res\Programi.csv";
+            //ErrorCode 
+
             if (!instantDiCtrl1.Initialized || !instantDoCtrl1.Initialized)
             {
                 MessageBox.Show("No device be selected or device open failed!", "StaticDI");
@@ -115,6 +118,7 @@ namespace TKK_Application
                     return;
                 }
 
+               //Console.WriteLine(portData);
                 m_portNum[i].Text = (i + m_startPort).ToString();
                 m_portHex[i].Text = portData.ToString("X2");
 
@@ -127,7 +131,9 @@ namespace TKK_Application
             }
             #endregion Inputs
 
-            #region Output
+            #region Outputs
+            /*
+            
             byte portDataOutput = 0;
             byte portDir = 0xFF;
             ErrorCode errOutput = ErrorCode.Success;
@@ -165,11 +171,9 @@ namespace TKK_Application
                     }
                     m_pictrueBoxOutput[i, j].Invalidate();
                 }
-            }
-
-
+            } 
+    */
             #endregion Output
-
         }
 
         private void InitOutputState()
@@ -227,11 +231,14 @@ namespace TKK_Application
 
             // refresh hex
             int state = Int32.Parse(m_portHexOutput[boxInfo.PortNum - ConstVal.StartPort].Text, NumberStyles.AllowHexSpecifier);
+            //Console.WriteLine("state:" + state);
             state &= ~(0x1 << boxInfo.BitNum);
             state |= boxInfo.BitValue << boxInfo.BitNum;
 
-            //Console.WriteLine(boxInfo.PortNum);
-            //Console.WriteLine(state);
+            string s = Convert.ToString(state, 2);
+            char[] bitsarr = s.PadLeft(8,'0').ToCharArray();
+            Array.Reverse(bitsarr);
+  
             m_portHexOutput[boxInfo.PortNum - ConstVal.StartPort].Text = state.ToString("X2");
             err = instantDoCtrl1.Write(boxInfo.PortNum, (byte)state);
             if (err != ErrorCode.Success)
@@ -298,6 +305,7 @@ namespace TKK_Application
             public const int PortCountShow = 4;
         }
         #endregion Utility functions
+
 
     }
 }

@@ -13,6 +13,7 @@ using Automation.BDaq;
 using System.Threading;
 using Microsoft.VisualBasic.FileIO;
 
+
 namespace TKK_Application
 {
     public partial class TKK : Form
@@ -20,10 +21,24 @@ namespace TKK_Application
         private Parametri_skenera param_skenera;
         private StatusIO _statusIO;
         private string csvFileLoc;
+        private string profileLoc;
 
         private SerialPort _serialPort;
-        private Label[] m_portNum;
-        private Label[] m_portHex;
+        //private Label[] m_portNum;
+        //private Label[] m_portHex;
+
+        private const int m_startPort = 0;
+        private const int m_portCountShow = 2;
+
+        private char[] ChStates_port0;
+        private char[] ChStates_port1;
+        private char[] ChOutputStates_port0;
+        public string[] lbl_States = { "READY", "ACTIVE", "ERROR" };
+
+        public DaqCtrlBase IOModule;
+
+        //public ErrorCode LoadProfile(string ss);
+
 
         public DataTable dt = new DataTable();
         private delegate void SetTextDeleg(string text);
@@ -31,8 +46,9 @@ namespace TKK_Application
         public TKK()
         {
             InitializeComponent();
+           // lbl_States = {"READY", "ACTIVE", "ERROR"};
             csvFileLoc = @"D:\N046_17 DOKUMENTACIJA I PROGRAM\Res\Programi.csv";
-          
+            profileLoc = @"D:\N046_17 DOKUMENTACIJA I PROGRAM\Res\ioProfile.xml";
             #region Datagrid
 
             dt.Columns.Add("ID", typeof(string));
@@ -54,7 +70,7 @@ namespace TKK_Application
             #endregion Datagrid
 
             #region ScannerInit
-            _serialPort = new SerialPort("COM5", 9600, Parity.None, 8, StopBits.One);
+            _serialPort = new SerialPort("COM7", 9600, Parity.None, 8, StopBits.One);
             _serialPort.Handshake = Handshake.RequestToSend;
             _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
             _serialPort.ReadTimeout = 110;
@@ -70,8 +86,16 @@ namespace TKK_Application
             #endregion ScannerInit
 
             #region IOModul
+
+
+
+            //IOModule.LoadProfile(profileLoc);
+            
             instantDoCtrl1.SelectedDevice = new DeviceInformation(1);
             instantDiCtrl1.SelectedDevice = new DeviceInformation(1);
+
+            instantDiCtrl1.LoadProfile(profileLoc);
+            
 
             if (!instantDoCtrl1.Initialized)
             {
@@ -87,17 +111,11 @@ namespace TKK_Application
                 return;
             }
             InitializePortState();
-            timer1.Start();
+            // timer1.Start();
 
             instantDiCtrl1.ChangeOfState += new EventHandler<DiSnapEventArgs>(DInputChanged);
             instantDiCtrl1.Interrupt += new EventHandler<DiSnapEventArgs>(instantDiCtrl_Interrupt);
 
-           /* if (!instantDiCtrl1.Features.DiCosintSupported)
-            {
-                Console.WriteLine("The device can not support DI status change interrupt function.");
-                return;
-            }
-            */
             if (!instantDiCtrl1.Features.DiintSupported)
             {
                 Console.WriteLine("The device can not support DI interrupt function.");
@@ -106,13 +124,19 @@ namespace TKK_Application
 
             DiintChannel[] interruptChans = instantDiCtrl1.DiintChannels;
             interruptChans[0].Enabled = true;
-      
+
             instantDiCtrl1.SnapStart();
+            ScanInputStates();
+
+            
             timer1.Start();
 
+            setOutput(0, 0);
             #endregion IOModul
 
-            pictureBox2.Image = imageList1.Images[0];
+            lightReady.Image = imageList3.Images[0];
+            
+
         }
 
         private void postavkeSkeneraToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -139,7 +163,7 @@ namespace TKK_Application
             byte portDir = 0xFF;
             ErrorCode err = ErrorCode.Success;
             byte[] mask = instantDoCtrl1.Features.DoDataMask;
-            
+
             for (int i = 0; (i + ConstVal.StartPort) < instantDoCtrl1.Features.PortCount && i < ConstVal.PortCountShow; ++i)
             {
                 err = instantDoCtrl1.Read(i + ConstVal.StartPort, out portData);
@@ -149,32 +173,13 @@ namespace TKK_Application
                     return;
                 }
 
-                //m_portNum[i].Text = (i + ConstVal.StartPort).ToString();
-                //m_portHex[i].Text = portData.ToString("X2");
-
                 if (instantDoCtrl1.Ports != null)
                 {
                     portDir = (byte)instantDoCtrl1.Ports[i + ConstVal.StartPort].DirectionMask;
                 }
-/*
-                // Set picture box state
-                for (int j = 0; j < 8; ++j)
-                {
-                    if (((portDir >> j) & 0x1) == 0 || ((mask[i] >> j) & 0x1) == 0)  // Bit direction is input.
-                    {
-                        m_pictrueBox[i, j].Image = imageList1.Images[2];
-                        m_pictrueBox[i, j].Enabled = false;
-                    }
-                    else
-                    {
-                        m_pictrueBox[i, j].Click += new EventHandler(PictureBox_Click);
-                        m_pictrueBox[i, j].Tag = new DoBitInformation((portData >> j) & 0x1, i + ConstVal.StartPort, j);
-                        m_pictrueBox[i, j].Image = imageList1.Images[(portData >> j) & 0x1];
-                    }
-                    m_pictrueBox[i, j].Invalidate();
- */
-                }
+                
             }
+        }
 
         private void HandleError(ErrorCode err)
         {
@@ -277,6 +282,7 @@ namespace TKK_Application
         private void timer1_Tick(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = DateTime.Now.ToString("MM-dd-yyyy h:mmtt:ss");
+            ScanInputStates();
         }
 
         #region datagridMethods
@@ -292,13 +298,13 @@ namespace TKK_Application
             {
                 string directoryPath = Path.GetDirectoryName(openFileDialog1.FileName);
                 string filename = System.IO.Path.GetFileName(openFileDialog1.FileName);
-                Console.WriteLine(directoryPath +"\\" + filename);
+                Console.WriteLine(directoryPath + "\\" + filename);
                 csvFileLoc = "'" + directoryPath + "\\" + filename + "'";
 
                 csvFileLoc = Path.Combine(directoryPath, filename);
-               // Console.WriteLine(csvFileLoc);
+                // Console.WriteLine(csvFileLoc);
                 string delimiter = ";";
-                readCsv(csvFileLoc, delimiter);            
+                readCsv(csvFileLoc, delimiter);
             }
         }
 
@@ -316,7 +322,7 @@ namespace TKK_Application
                 while (!tfp.EndOfData)
                     dt.Rows.Add(tfp.ReadFields());
             }
-      
+
         }
 
         private void scannedCode_TextChanged(object sender, EventArgs e)
@@ -324,7 +330,7 @@ namespace TKK_Application
             string searchValue = scannedCode.Text;
 
             //searchValue = scannedCode.Text;
-            
+
             int rowIndex = -1;
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -343,11 +349,11 @@ namespace TKK_Application
             {
                 dataGridView1.Rows[rowIndex].Selected = true;
             }
-  
-           /* string columnName = "BARCODE";
 
-            string rowFilter = string.Format("[{0}] = '{1}'", columnName, searchValue);
-            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = rowFilter;*/
+            /* string columnName = "BARCODE";
+
+             string rowFilter = string.Format("[{0}] = '{1}'", columnName, searchValue);
+             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = rowFilter;*/
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -359,7 +365,7 @@ namespace TKK_Application
                 readCsv(csvFileLoc, delimiter);
                 (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = null;
             }
-            
+
             return;
         }
 
@@ -439,28 +445,267 @@ namespace TKK_Application
         }
         #endregion Scanner
 
-        private void startAuto_Click(object sender, EventArgs e)
+        #region Automatika
+
+        public void initCheck()
         {
+            ScanInputStates();
+            setOutput(0, 9);
+            setStatus(0);
+        }
+
+        private async void btnStartAuto_Click(object sender, EventArgs e)
+        {
+            resetOutputs();
+            await Task.Delay(1000);
+            setOutput(0, 9);
+            ScanInputStates();
+            await Task.Delay(2000);
+
+            setOutput(0, 29);
+            setStatus(1);
 
         }
 
+        private async void btnStopAuto_Click(object sender, EventArgs e)
+        {
+            int i;
+            for (i= 0; i < ChStates_port0.Count() - 1; i++)
+            {
+               // Console.WriteLine(ChStates_port0[i]);
+
+            }
+            setOutput(0, 40);
+            Console.WriteLine("Output set to 40");
+
+            await Task.Delay(1000);
+
+            setOutput(0, 0);
+            Console.WriteLine("Output set to 0");
+
+            setStatus(0);
+        }
+        #endregion Automatika
+
+        private void setOutput(int portNum, int state)
+        {
+            ErrorCode err = ErrorCode.Success;
+            err = instantDoCtrl1.Write(portNum, (byte)state);
+            if (err != ErrorCode.Success)
+            {
+                HandleError(err);
+            }
+            Console.WriteLine("Output set to: " + state);
+        }
+
+        private void setStatus(int state)
+        {
+
+            lightReady.Image = imageList3.Images[state];
+            lblStatus.Text = lbl_States[state]; 
+        }
+
+        private void ScanInputStates()
+        {
+            #region Inputs
+            byte portData = 0;
+
+            ErrorCode err = ErrorCode.Success;
+            err = instantDiCtrl1.Read(0, out portData);
+            if (err != ErrorCode.Success)
+            {
+                timer1.Enabled = false;
+                HandleError(err);
+                return;
+            }
+
+            ChStates_port0 = convertToArr(portData);
+            string a = new string(ChStates_port0);
+            inputsStatus.Text = a;
+
+           // Console.WriteLine(ChStates_port0[2]);
+            if (ChStates_port0[2] == '0')
+            {
+                resetOutputs();
+                Console.WriteLine("Total stop pressed");
+                setStatus(2);
+            }
+
+            ErrorCode err1 = ErrorCode.Success;
+            err1 = instantDiCtrl1.Read(1, out portData);
+            if (err1 != ErrorCode.Success)
+            {
+                timer1.Enabled = false;
+                HandleError(err);
+                return;
+            }
+            ChStates_port1 = convertToArr(portData);
+            string b = new string(ChStates_port1);
+            inputStatus1.Text = b;
+
+
+
+            #endregion Inputs
+
+            getOutputState();
+
+        }
+
+        private void resetOutputs()
+        {
+            setOutput(0, 8);
+            Console.WriteLine("Ouputs reseted");
+        }
+
+        private void getOutputState()
+        {
+
+            byte portData = 0;
+            byte portDir = 0xFF;
+            ErrorCode err = ErrorCode.Success;
+            byte[] mask = instantDoCtrl1.Features.DoDataMask;
+
+
+            err = instantDoCtrl1.Read(ConstVal.StartPort, out portData);
+            if (err != ErrorCode.Success)
+            {
+                HandleError(err);
+                return;
+            }
+
+            if (instantDoCtrl1.Ports != null)
+            {
+                portDir = (byte)instantDoCtrl1.Ports[ConstVal.StartPort].DirectionMask;
+            }
+            ChOutputStates_port0 = convertToArr(portData);
+
+            Array.Reverse(ChOutputStates_port0);
+            string outStats = new string(ChOutputStates_port0);
+            ostatustext.Text = outStats;
+            
+            }
+
+        private char[] convertToArr(int state)
+        {
+            string s = Convert.ToString(state, 2);
+            char[] bitsarr = s.PadLeft(8, '0').ToCharArray();
+            Array.Reverse(bitsarr);
+            return bitsarr;
+        }
+
+        private string convertOutputToString(char[] outputState)
+        {
+            string result = new string(outputState);
+            return result;           
+        }
+
+        //Separator 1. START
         private void button2_Click(object sender, EventArgs e)
         {
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            newState[5] = '1';
+            newState[4] = '1';
+
+            string outputS = convertOutputToString(newState);
+            int output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+        }
+
+
+        
+        private async void button5_Click(object sender, EventArgs e)
+        {
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            newState[2] = '0';
+            newState[3] = '1';
+            string outputS = convertOutputToString(newState);
+            int output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+
+            await Task.Delay(300);
+
+            getOutputState();
+            newState = ChOutputStates_port0;
+            newState[2] = '0';
+            newState[3] = '0';
+            outputS = convertOutputToString(newState);
+            output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+        }
+
+
+        //Separator 1. STOP
+        private void button3_Click(object sender, EventArgs e)
+        {
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            newState[5] = '0';
+            newState[4] = '0';
+
+            string outputS = convertOutputToString(newState);
+            Console.WriteLine("OUTPUTS 1.korak :" + outputS);
+            int output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
 
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        //Separator 2 Stop
+        private async void button4_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Auto start clicked");
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            newState[3] = '0';
+            newState[2] = '1';
+            string outputS = convertOutputToString(newState);
+            int output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
 
-            pictureBox2.Image = imageList1.Images[1];
-            /*if (pictureBox2.Image == imageList1.Images[0])
-            {
-                pictureBox2.Image = imageList1.Images[1];
-            }
-            else {
-                pictureBox2.Image = imageList1.Images[0];
-            }*/
+
+            await Task.Delay(300);
+
+            getOutputState();
+            newState = ChOutputStates_port0;
+            newState[3] = '0';
+            newState[2] = '0';
+            outputS = convertOutputToString(newState);
+            output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+        }
+
+        //MOTOR FWD
+        private void button6_Click(object sender, EventArgs e)
+        {
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            newState[7] = '1';
+            newState[6] = '0';
+            string outputS = convertOutputToString(newState);
+            int output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+        }
+        //MOTOR STOP
+        private void button8_Click(object sender, EventArgs e)
+        {
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            newState[7] = '0';
+            newState[6] = '0';
+            string outputS = convertOutputToString(newState);
+            int output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+        }
+        //MOTOR REV
+        private void button7_Click(object sender, EventArgs e)
+        {
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            newState[6] = '1';
+            newState[7] = '0';
+            string outputS = convertOutputToString(newState);
+            int output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
         }
     }
 }
