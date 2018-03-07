@@ -12,6 +12,7 @@ using System.IO;
 using Automation.BDaq;
 using System.Threading;
 using Microsoft.VisualBasic.FileIO;
+using System.Data.OleDb;
 
 
 namespace TKK_Application

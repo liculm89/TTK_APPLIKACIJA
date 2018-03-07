@@ -51,3 +51,7 @@ D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bi
 D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\TKK_Application.application
 D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.exe.manifest
 D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.application
+G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\TKK_Application.exe.manifest
+G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Debug\TKK_Application.application
+G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.exe.manifest
+G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Debug\TKK_Application.application
