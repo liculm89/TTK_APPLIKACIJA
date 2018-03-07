@@ -13,6 +13,7 @@ using Automation.BDaq;
 using System.Threading;
 using Microsoft.VisualBasic.FileIO;
 using System.Data.OleDb;
+using System.Collections.Generic;
 
 
 namespace TKK_Application
@@ -23,10 +24,11 @@ namespace TKK_Application
         private StatusIO _statusIO;
         private string csvFileLoc;
         private string profileLoc;
-
+        
         private SerialPort _serialPort;
         //private Label[] m_portNum;
         //private Label[] m_portHex;
+        //static string Db_Password = Globals.db_passwd;
 
         private const int m_startPort = 0;
         private const int m_portCountShow = 2;

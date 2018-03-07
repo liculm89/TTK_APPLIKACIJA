@@ -123,6 +123,16 @@ namespace TKK_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap login {
+            get {
+                object obj = ResourceManager.GetObject("login", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap molumen_red_round_error_warning_icon_2400px {
             get {
                 object obj = ResourceManager.GetObject("molumen_red_round_error_warning_icon_2400px", resourceCulture);
@@ -156,6 +166,26 @@ namespace TKK_Application.Properties {
         internal static System.Drawing.Bitmap sinel_logo {
             get {
                 object obj = ResourceManager.GetObject("sinel_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user_2 {
+            get {
+                object obj = ResourceManager.GetObject("user_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user_login_pic {
+            get {
+                object obj = ResourceManager.GetObject("user_login_pic", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
