@@ -46,6 +46,7 @@ namespace TKK_Application
         public TKK()
         {
             InitializeComponent();
+            panel_debug.Hide();
            // lbl_States = {"READY", "ACTIVE", "ERROR"};
             csvFileLoc = @"D:\N046_17 DOKUMENTACIJA I PROGRAM\Res\Programi.csv";
             profileLoc = @"D:\N046_17 DOKUMENTACIJA I PROGRAM\Res\ioProfile.xml";
@@ -113,8 +114,7 @@ namespace TKK_Application
             InitializePortState();
             // timer1.Start();
 
-            instantDiCtrl1.ChangeOfState += new EventHandler<DiSnapEventArgs>(DInputChanged);
-            instantDiCtrl1.Interrupt += new EventHandler<DiSnapEventArgs>(instantDiCtrl_Interrupt);
+            
 
             if (!instantDiCtrl1.Features.DiintSupported)
             {
@@ -124,18 +124,33 @@ namespace TKK_Application
 
             DiintChannel[] interruptChans = instantDiCtrl1.DiintChannels;
             interruptChans[0].Enabled = true;
+            interruptChans[1].Enabled = true;
 
             instantDiCtrl1.SnapStart();
             ScanInputStates();
 
-            
+            instantDiCtrl1.ChangeOfState += new EventHandler<DiSnapEventArgs>(DInputChanged);
+            instantDiCtrl1.Interrupt += new EventHandler<DiSnapEventArgs>(instantDiCtrl_Interrupt);
+
+            //SnapStart();
+
             timer1.Start();
 
             setOutput(0, 0);
             #endregion IOModul
 
             lightReady.Image = imageList3.Images[0];
-            
+            ScanInputStates();
+            //setOutput(0, 9);
+            if (ChStates_port0[2] == '1')
+            {
+                setStatus(0);
+            }
+            else
+            {
+                setStatus(2);
+            }
+
 
         }
 
@@ -283,6 +298,7 @@ namespace TKK_Application
         {
             toolStripStatusLabel1.Text = DateTime.Now.ToString("MM-dd-yyyy h:mmtt:ss");
             ScanInputStates();
+            
         }
 
         #region datagridMethods
@@ -450,40 +466,147 @@ namespace TKK_Application
         public void initCheck()
         {
             ScanInputStates();
-            setOutput(0, 9);
-            setStatus(0);
+            //setOutput(0, 9);
+            if (ChStates_port0[2] == '1')
+            {
+                setStatus(0);
+            }
+            else
+            {
+                setStatus(2);
+            }
         }
 
         private async void btnStartAuto_Click(object sender, EventArgs e)
         {
             resetOutputs();
-            await Task.Delay(1000);
-            setOutput(0, 9);
-            ScanInputStates();
-            await Task.Delay(2000);
 
-            setOutput(0, 29);
-            setStatus(1);
+            ScanInputStates();
+            if (ChStates_port0[2] == '1')
+            {
+                btnStopAuto.Enabled = false;
+                getOutputState();
+                char[] newState = ChOutputStates_port0;
+                string outputS = convertOutputToString(newState);
+                int output = Convert.ToInt32(outputS, 2);
+                int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+                string a = Convert.ToString(selectedRow.Cells["SMJER"].Value);
+
+                await Task.Delay(500);
+                #region motorDir
+                if (a == "1")
+                {
+                    newState[7] = '1';
+                    outputS = convertOutputToString(newState);
+                    output = Convert.ToInt32(outputS, 2);
+                    setOutput(0, output);
+                }
+                else if (a == "2")
+                {
+                    newState[6] = '1';
+                    outputS = convertOutputToString(newState);
+                    output = Convert.ToInt32(outputS, 2);
+                    setOutput(0, output);
+                }
+                #endregion motorDir
+                await Task.Delay(500);
+
+                getOutputState();
+                newState = ChOutputStates_port0;
+                newState[5] = '1';
+                newState[4] = '1';
+                newState[3] = '1';
+                newState[1] = '1';
+                outputS = convertOutputToString(newState);
+                output = Convert.ToInt32(outputS, 2);
+                setOutput(0, output);
+
+                /*
+                setOutput(0, 9);
+                */
+                ScanInputStates();
+                await Task.Delay(1000);
+
+                //setOutput(0, 29);
+                setStatus(1);
+                panel_manual.Hide();
+                btnStopAuto.Enabled = true;
+            }
+            else {
+                MessageBox.Show("TOTAL STOP IS ACTIVE!", "TOTAL STOP ERROR");
+
+            }
 
         }
 
-        private async void btnStopAuto_Click(object sender, EventArgs e)
+        private async void autmaticStop()
         {
-            int i;
-            for (i= 0; i < ChStates_port0.Count() - 1; i++)
-            {
-               // Console.WriteLine(ChStates_port0[i]);
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            string outputS = convertOutputToString(newState);
+            int output = Convert.ToInt32(outputS, 2);
 
-            }
-            setOutput(0, 40);
-            Console.WriteLine("Output set to 40");
+            newState[5] = '0';
+            newState[4] = '0';
+            outputS = convertOutputToString(newState);
+            output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
 
-            await Task.Delay(1000);
+            await Task.Delay(5000);
+
+            getOutputState();
+            newState = ChOutputStates_port0;
+            newState[7] = '0';
+            newState[6] = '0';
+            newState[2] = '1';
+
+            outputS = convertOutputToString(newState);
+            output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+
+            await Task.Delay(100);
 
             setOutput(0, 0);
             Console.WriteLine("Output set to 0");
 
             setStatus(0);
+            panel_manual.Show();
+        }
+
+        private async void btnStopAuto_Click(object sender, EventArgs e)
+        {
+            
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            string outputS = convertOutputToString(newState);
+            int output = Convert.ToInt32(outputS, 2);
+
+            newState[5] = '0';
+            newState[4] = '0';
+            outputS = convertOutputToString(newState);
+            output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+           
+            await Task.Delay(2000);
+
+            getOutputState();
+            newState = ChOutputStates_port0;
+            newState[7] = '0';
+            newState[6] = '0';
+            newState[2] = '1';
+
+            outputS = convertOutputToString(newState);
+            output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+
+            await Task.Delay(100);
+
+            setOutput(0, 0);
+            Console.WriteLine("Output set to 0");
+
+            setStatus(0);
+            panel_manual.Show();
         }
         #endregion Automatika
 
@@ -518,18 +641,19 @@ namespace TKK_Application
                 HandleError(err);
                 return;
             }
-
+            
             ChStates_port0 = convertToArr(portData);
             string a = new string(ChStates_port0);
             inputsStatus.Text = a;
 
            // Console.WriteLine(ChStates_port0[2]);
-            if (ChStates_port0[2] == '0')
+           /* if (ChStates_port0[2] == '0')
             {
-                resetOutputs();
-                Console.WriteLine("Total stop pressed");
+                //resetOutputs();
+                //Console.WriteLine("Total stop pressed");
                 setStatus(2);
-            }
+            }*/
+           // else if(chsate)
 
             ErrorCode err1 = ErrorCode.Success;
             err1 = instantDiCtrl1.Read(1, out portData);
@@ -551,9 +675,22 @@ namespace TKK_Application
 
         }
 
-        private void resetOutputs()
+        private async void resetOutputs()
         {
+
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            newState[3] = '0';
+            newState[2] = '1';
+            string outputS = convertOutputToString(newState);
+            int output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+
+
+            await Task.Delay(300);
             setOutput(0, 8);
+
+
             Console.WriteLine("Ouputs reseted");
         }
 
@@ -602,18 +739,28 @@ namespace TKK_Application
         //Separator 1. START
         private void button2_Click(object sender, EventArgs e)
         {
-            getOutputState();
-            char[] newState = ChOutputStates_port0;
-            newState[5] = '1';
-            newState[4] = '1';
+            if (ChStates_port0[2] == '1')
+            {
 
-            string outputS = convertOutputToString(newState);
-            int output = Convert.ToInt32(outputS, 2);
-            setOutput(0, output);
-        }
+                getOutputState();
+                char[] newState = ChOutputStates_port0;
+                newState[5] = '1';
+                newState[4] = '1';
+
+                string outputS = convertOutputToString(newState);
+                int output = Convert.ToInt32(outputS, 2);
+                setOutput(0, output);
+            }
+            else
+            {
+                MessageBox.Show("TOTAL STOP IS ACTIVE!", "TOTAL STOP ERROR");
+
+            }
+
+            }
 
 
-        
+
         private async void button5_Click(object sender, EventArgs e)
         {
             getOutputState();
@@ -677,13 +824,21 @@ namespace TKK_Application
         //MOTOR FWD
         private void button6_Click(object sender, EventArgs e)
         {
-            getOutputState();
+            if (ChStates_port0[2] == '1')
+            {
+                getOutputState();
             char[] newState = ChOutputStates_port0;
             newState[7] = '1';
             newState[6] = '0';
             string outputS = convertOutputToString(newState);
             int output = Convert.ToInt32(outputS, 2);
             setOutput(0, output);
+            }
+            else
+            {
+                MessageBox.Show("TOTAL STOP IS ACTIVE!", "TOTAL STOP ERROR");
+
+            }
         }
         //MOTOR STOP
         private void button8_Click(object sender, EventArgs e)
@@ -695,17 +850,68 @@ namespace TKK_Application
             string outputS = convertOutputToString(newState);
             int output = Convert.ToInt32(outputS, 2);
             setOutput(0, output);
+
         }
         //MOTOR REV
         private void button7_Click(object sender, EventArgs e)
         {
-            getOutputState();
+            if (ChStates_port0[2] == '1')
+            {
+                getOutputState();
             char[] newState = ChOutputStates_port0;
             newState[6] = '1';
             newState[7] = '0';
             string outputS = convertOutputToString(newState);
             int output = Convert.ToInt32(outputS, 2);
             setOutput(0, output);
+        }
+            else
+            {
+                MessageBox.Show("TOTAL STOP IS ACTIVE!", "TOTAL STOP ERROR");
+
+            }
+}
+
+        private void btn_ispON_Click(object sender, EventArgs e)
+        {
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            newState[1] = '1';
+           // newState[7] = '0';
+            string outputS = convertOutputToString(newState);
+            int output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+        }
+
+        private void btn_ispOFF_Click(object sender, EventArgs e)
+        {
+            getOutputState();
+            char[] newState = ChOutputStates_port0;
+            newState[1] = '0';
+            // newState[7] = '0';
+            string outputS = convertOutputToString(newState);
+            int output = Convert.ToInt32(outputS, 2);
+            setOutput(0, output);
+        }
+
+        private void timer_auto_Tick(object sender, EventArgs e)
+        {
+            ScanInputStates();
+            if (ChStates_port0[2] == '0')
+            {
+                resetOutputs();
+                Console.WriteLine("Total stop pressed");
+                setStatus(2);
+                timer_auto.Stop();
+                //setStatus(2);
+            }
+            /*
+            if(ChStates_port0[0] == '0')
+            {
+                resetOutputs();
+                Console.WriteLine("Total stop pressed");
+                setStatus(2);
+            }*/
         }
     }
 }

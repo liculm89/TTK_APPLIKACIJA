@@ -73,6 +73,15 @@
             this.lightReady = new System.Windows.Forms.PictureBox();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.ostatustext = new System.Windows.Forms.TextBox();
+            this.MotorStop = new System.Windows.Forms.Button();
+            this.MotorREV = new System.Windows.Forms.Button();
+            this.MotorFWD = new System.Windows.Forms.Button();
+            this.stopSep2 = new System.Windows.Forms.Button();
+            this.startSep2 = new System.Windows.Forms.Button();
+            this.stopSep1 = new System.Windows.Forms.Button();
+            this.startSep1 = new System.Windows.Forms.Button();
             this.inputStatus1 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.inputsStatus = new System.Windows.Forms.TextBox();
@@ -80,15 +89,11 @@
             this.btnStartAuto = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.imageList3 = new System.Windows.Forms.ImageList(this.components);
-            this.startSep1 = new System.Windows.Forms.Button();
-            this.stopSep1 = new System.Windows.Forms.Button();
-            this.stopSep2 = new System.Windows.Forms.Button();
-            this.startSep2 = new System.Windows.Forms.Button();
-            this.MotorFWD = new System.Windows.Forms.Button();
-            this.MotorREV = new System.Windows.Forms.Button();
-            this.MotorStop = new System.Windows.Forms.Button();
-            this.ostatustext = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.panel_manual = new System.Windows.Forms.Panel();
+            this.panel_debug = new System.Windows.Forms.Panel();
+            this.btn_ispON = new System.Windows.Forms.Button();
+            this.btn_ispOFF = new System.Windows.Forms.Button();
+            this.timer_auto = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -101,6 +106,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lightReady)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.panel8.SuspendLayout();
+            this.panel_manual.SuspendLayout();
+            this.panel_debug.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -154,7 +161,7 @@
             // 
             // DO1_btn
             // 
-            this.DO1_btn.Location = new System.Drawing.Point(243, 481);
+            this.DO1_btn.Location = new System.Drawing.Point(237, 50);
             this.DO1_btn.Name = "DO1_btn";
             this.DO1_btn.Size = new System.Drawing.Size(100, 38);
             this.DO1_btn.TabIndex = 1;
@@ -164,7 +171,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(196, 496);
+            this.textBox1.Location = new System.Drawing.Point(190, 65);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(41, 20);
             this.textBox1.TabIndex = 2;
@@ -420,7 +427,7 @@
             // 
             // connScanner
             // 
-            this.connScanner.Location = new System.Drawing.Point(223, 437);
+            this.connScanner.Location = new System.Drawing.Point(217, 6);
             this.connScanner.Name = "connScanner";
             this.connScanner.Size = new System.Drawing.Size(122, 38);
             this.connScanner.TabIndex = 10;
@@ -475,33 +482,141 @@
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.panel8.Controls.Add(this.label8);
-            this.panel8.Controls.Add(this.ostatustext);
-            this.panel8.Controls.Add(this.MotorStop);
-            this.panel8.Controls.Add(this.MotorREV);
-            this.panel8.Controls.Add(this.MotorFWD);
-            this.panel8.Controls.Add(this.stopSep2);
-            this.panel8.Controls.Add(this.startSep2);
-            this.panel8.Controls.Add(this.stopSep1);
-            this.panel8.Controls.Add(this.startSep1);
-            this.panel8.Controls.Add(this.inputStatus1);
-            this.panel8.Controls.Add(this.label7);
-            this.panel8.Controls.Add(this.inputsStatus);
+            this.panel8.Controls.Add(this.panel_debug);
             this.panel8.Controls.Add(this.btnStopAuto);
             this.panel8.Controls.Add(this.btnStartAuto);
-            this.panel8.Controls.Add(this.connScanner);
-            this.panel8.Controls.Add(this.DO1_btn);
+            this.panel8.Controls.Add(this.panel_manual);
             this.panel8.Controls.Add(this.lblStatus);
-            this.panel8.Controls.Add(this.textBox1);
             this.panel8.Controls.Add(this.lightReady);
             this.panel8.Location = new System.Drawing.Point(0, 31);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(348, 528);
             this.panel8.TabIndex = 23;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(0, 24);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(76, 13);
+            this.label8.TabIndex = 39;
+            this.label8.Text = "Status outputa";
+            // 
+            // ostatustext
+            // 
+            this.ostatustext.Location = new System.Drawing.Point(82, 21);
+            this.ostatustext.Name = "ostatustext";
+            this.ostatustext.Size = new System.Drawing.Size(100, 20);
+            this.ostatustext.TabIndex = 38;
+            // 
+            // MotorStop
+            // 
+            this.MotorStop.BackColor = System.Drawing.Color.Red;
+            this.MotorStop.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.MotorStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.MotorStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MotorStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.MotorStop.Location = new System.Drawing.Point(119, 5);
+            this.MotorStop.Name = "MotorStop";
+            this.MotorStop.Size = new System.Drawing.Size(100, 50);
+            this.MotorStop.TabIndex = 37;
+            this.MotorStop.Text = "Motor Stop";
+            this.MotorStop.UseVisualStyleBackColor = false;
+            this.MotorStop.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // MotorREV
+            // 
+            this.MotorREV.BackColor = System.Drawing.Color.LawnGreen;
+            this.MotorREV.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.MotorREV.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.MotorREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MotorREV.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.MotorREV.Location = new System.Drawing.Point(225, 5);
+            this.MotorREV.Name = "MotorREV";
+            this.MotorREV.Size = new System.Drawing.Size(110, 50);
+            this.MotorREV.TabIndex = 36;
+            this.MotorREV.Text = "Motor REV";
+            this.MotorREV.UseVisualStyleBackColor = false;
+            this.MotorREV.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // MotorFWD
+            // 
+            this.MotorFWD.BackColor = System.Drawing.Color.LawnGreen;
+            this.MotorFWD.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.MotorFWD.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.MotorFWD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MotorFWD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.MotorFWD.Location = new System.Drawing.Point(3, 5);
+            this.MotorFWD.Name = "MotorFWD";
+            this.MotorFWD.Size = new System.Drawing.Size(110, 50);
+            this.MotorFWD.TabIndex = 35;
+            this.MotorFWD.Text = "Motor FWD";
+            this.MotorFWD.UseVisualStyleBackColor = false;
+            this.MotorFWD.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // stopSep2
+            // 
+            this.stopSep2.BackColor = System.Drawing.Color.Red;
+            this.stopSep2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.stopSep2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.stopSep2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stopSep2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.stopSep2.Location = new System.Drawing.Point(225, 117);
+            this.stopSep2.Name = "stopSep2";
+            this.stopSep2.Size = new System.Drawing.Size(110, 52);
+            this.stopSep2.TabIndex = 34;
+            this.stopSep2.Text = "Stop separator 2.";
+            this.stopSep2.UseVisualStyleBackColor = false;
+            this.stopSep2.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // startSep2
+            // 
+            this.startSep2.BackColor = System.Drawing.Color.LawnGreen;
+            this.startSep2.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.startSep2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.startSep2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.startSep2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.startSep2.Location = new System.Drawing.Point(225, 61);
+            this.startSep2.Name = "startSep2";
+            this.startSep2.Size = new System.Drawing.Size(110, 50);
+            this.startSep2.TabIndex = 33;
+            this.startSep2.Text = "Start separator 2.";
+            this.startSep2.UseVisualStyleBackColor = false;
+            this.startSep2.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // stopSep1
+            // 
+            this.stopSep1.BackColor = System.Drawing.Color.Red;
+            this.stopSep1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.stopSep1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.stopSep1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stopSep1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.stopSep1.Location = new System.Drawing.Point(3, 117);
+            this.stopSep1.Name = "stopSep1";
+            this.stopSep1.Size = new System.Drawing.Size(110, 51);
+            this.stopSep1.TabIndex = 32;
+            this.stopSep1.Text = "Stop separator 1.";
+            this.stopSep1.UseVisualStyleBackColor = false;
+            this.stopSep1.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // startSep1
+            // 
+            this.startSep1.BackColor = System.Drawing.Color.LawnGreen;
+            this.startSep1.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.startSep1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.startSep1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.startSep1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.startSep1.Location = new System.Drawing.Point(3, 61);
+            this.startSep1.Name = "startSep1";
+            this.startSep1.Size = new System.Drawing.Size(110, 50);
+            this.startSep1.TabIndex = 31;
+            this.startSep1.Text = "Start separator 1.";
+            this.startSep1.UseVisualStyleBackColor = false;
+            this.startSep1.Click += new System.EventHandler(this.button2_Click);
+            // 
             // inputStatus1
             // 
-            this.inputStatus1.Location = new System.Drawing.Point(88, 500);
+            this.inputStatus1.Location = new System.Drawing.Point(82, 69);
             this.inputStatus1.Name = "inputStatus1";
             this.inputStatus1.Size = new System.Drawing.Size(100, 20);
             this.inputStatus1.TabIndex = 30;
@@ -509,7 +624,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 477);
+            this.label7.Location = new System.Drawing.Point(7, 46);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 13);
             this.label7.TabIndex = 29;
@@ -517,7 +632,7 @@
             // 
             // inputsStatus
             // 
-            this.inputsStatus.Location = new System.Drawing.Point(88, 474);
+            this.inputsStatus.Location = new System.Drawing.Point(82, 43);
             this.inputsStatus.Name = "inputsStatus";
             this.inputsStatus.Size = new System.Drawing.Size(100, 20);
             this.inputsStatus.TabIndex = 28;
@@ -529,9 +644,9 @@
             this.btnStopAuto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnStopAuto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStopAuto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnStopAuto.Location = new System.Drawing.Point(177, 196);
+            this.btnStopAuto.Location = new System.Drawing.Point(175, 194);
             this.btnStopAuto.Name = "btnStopAuto";
-            this.btnStopAuto.Size = new System.Drawing.Size(150, 60);
+            this.btnStopAuto.Size = new System.Drawing.Size(170, 60);
             this.btnStopAuto.TabIndex = 27;
             this.btnStopAuto.Text = "STOP AUTO";
             this.btnStopAuto.UseVisualStyleBackColor = false;
@@ -544,9 +659,9 @@
             this.btnStartAuto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnStartAuto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStartAuto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnStartAuto.Location = new System.Drawing.Point(21, 196);
+            this.btnStartAuto.Location = new System.Drawing.Point(3, 194);
             this.btnStartAuto.Name = "btnStartAuto";
-            this.btnStartAuto.Size = new System.Drawing.Size(150, 60);
+            this.btnStartAuto.Size = new System.Drawing.Size(170, 60);
             this.btnStartAuto.TabIndex = 16;
             this.btnStartAuto.Text = "START AUTO";
             this.btnStartAuto.UseVisualStyleBackColor = false;
@@ -570,126 +685,70 @@
             this.imageList3.Images.SetKeyName(1, "glossy-yellow-button-2400px.png");
             this.imageList3.Images.SetKeyName(2, "glossy-red-button-2400px.png");
             // 
-            // startSep1
+            // panel_manual
             // 
-            this.startSep1.BackColor = System.Drawing.Color.LawnGreen;
-            this.startSep1.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.startSep1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.startSep1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.startSep1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.startSep1.Location = new System.Drawing.Point(21, 262);
-            this.startSep1.Name = "startSep1";
-            this.startSep1.Size = new System.Drawing.Size(110, 50);
-            this.startSep1.TabIndex = 31;
-            this.startSep1.Text = "Start separator 1.";
-            this.startSep1.UseVisualStyleBackColor = false;
-            this.startSep1.Click += new System.EventHandler(this.button2_Click);
+            this.panel_manual.Controls.Add(this.btn_ispOFF);
+            this.panel_manual.Controls.Add(this.btn_ispON);
+            this.panel_manual.Controls.Add(this.startSep1);
+            this.panel_manual.Controls.Add(this.MotorStop);
+            this.panel_manual.Controls.Add(this.stopSep1);
+            this.panel_manual.Controls.Add(this.MotorREV);
+            this.panel_manual.Controls.Add(this.startSep2);
+            this.panel_manual.Controls.Add(this.MotorFWD);
+            this.panel_manual.Controls.Add(this.stopSep2);
+            this.panel_manual.Location = new System.Drawing.Point(3, 265);
+            this.panel_manual.Name = "panel_manual";
+            this.panel_manual.Size = new System.Drawing.Size(340, 171);
+            this.panel_manual.TabIndex = 40;
             // 
-            // stopSep1
+            // panel_debug
             // 
-            this.stopSep1.BackColor = System.Drawing.Color.Red;
-            this.stopSep1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.stopSep1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.stopSep1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stopSep1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.stopSep1.Location = new System.Drawing.Point(21, 318);
-            this.stopSep1.Name = "stopSep1";
-            this.stopSep1.Size = new System.Drawing.Size(110, 48);
-            this.stopSep1.TabIndex = 32;
-            this.stopSep1.Text = "Stop separator 1.";
-            this.stopSep1.UseVisualStyleBackColor = false;
-            this.stopSep1.Click += new System.EventHandler(this.button3_Click);
+            this.panel_debug.Controls.Add(this.label8);
+            this.panel_debug.Controls.Add(this.textBox1);
+            this.panel_debug.Controls.Add(this.DO1_btn);
+            this.panel_debug.Controls.Add(this.connScanner);
+            this.panel_debug.Controls.Add(this.inputsStatus);
+            this.panel_debug.Controls.Add(this.ostatustext);
+            this.panel_debug.Controls.Add(this.label7);
+            this.panel_debug.Controls.Add(this.inputStatus1);
+            this.panel_debug.Location = new System.Drawing.Point(11, 436);
+            this.panel_debug.Name = "panel_debug";
+            this.panel_debug.Size = new System.Drawing.Size(332, 100);
+            this.panel_debug.TabIndex = 41;
             // 
-            // stopSep2
+            // btn_ispON
             // 
-            this.stopSep2.BackColor = System.Drawing.Color.Red;
-            this.stopSep2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.stopSep2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.stopSep2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stopSep2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.stopSep2.Location = new System.Drawing.Point(217, 318);
-            this.stopSep2.Name = "stopSep2";
-            this.stopSep2.Size = new System.Drawing.Size(110, 48);
-            this.stopSep2.TabIndex = 34;
-            this.stopSep2.Text = "Stop separator 2.";
-            this.stopSep2.UseVisualStyleBackColor = false;
-            this.stopSep2.Click += new System.EventHandler(this.button4_Click);
+            this.btn_ispON.BackColor = System.Drawing.Color.LawnGreen;
+            this.btn_ispON.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.btn_ispON.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btn_ispON.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_ispON.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btn_ispON.Location = new System.Drawing.Point(119, 61);
+            this.btn_ispON.Name = "btn_ispON";
+            this.btn_ispON.Size = new System.Drawing.Size(100, 50);
+            this.btn_ispON.TabIndex = 38;
+            this.btn_ispON.Text = "Ispuhivanje ON";
+            this.btn_ispON.UseVisualStyleBackColor = false;
+            this.btn_ispON.Click += new System.EventHandler(this.btn_ispON_Click);
             // 
-            // startSep2
+            // btn_ispOFF
             // 
-            this.startSep2.BackColor = System.Drawing.Color.LawnGreen;
-            this.startSep2.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.startSep2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.startSep2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.startSep2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.startSep2.Location = new System.Drawing.Point(217, 262);
-            this.startSep2.Name = "startSep2";
-            this.startSep2.Size = new System.Drawing.Size(110, 50);
-            this.startSep2.TabIndex = 33;
-            this.startSep2.Text = "Start separator 2.";
-            this.startSep2.UseVisualStyleBackColor = false;
-            this.startSep2.Click += new System.EventHandler(this.button5_Click);
+            this.btn_ispOFF.BackColor = System.Drawing.Color.Red;
+            this.btn_ispOFF.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btn_ispOFF.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btn_ispOFF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_ispOFF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btn_ispOFF.Location = new System.Drawing.Point(119, 117);
+            this.btn_ispOFF.Name = "btn_ispOFF";
+            this.btn_ispOFF.Size = new System.Drawing.Size(100, 52);
+            this.btn_ispOFF.TabIndex = 39;
+            this.btn_ispOFF.Text = "Ispuhivanje OFF";
+            this.btn_ispOFF.UseVisualStyleBackColor = false;
+            this.btn_ispOFF.Click += new System.EventHandler(this.btn_ispOFF_Click);
             // 
-            // MotorFWD
+            // timer_auto
             // 
-            this.MotorFWD.BackColor = System.Drawing.Color.LawnGreen;
-            this.MotorFWD.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.MotorFWD.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.MotorFWD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MotorFWD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.MotorFWD.Location = new System.Drawing.Point(21, 372);
-            this.MotorFWD.Name = "MotorFWD";
-            this.MotorFWD.Size = new System.Drawing.Size(110, 50);
-            this.MotorFWD.TabIndex = 35;
-            this.MotorFWD.Text = "Motor FWD";
-            this.MotorFWD.UseVisualStyleBackColor = false;
-            this.MotorFWD.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // MotorREV
-            // 
-            this.MotorREV.BackColor = System.Drawing.Color.LawnGreen;
-            this.MotorREV.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.MotorREV.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.MotorREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MotorREV.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.MotorREV.Location = new System.Drawing.Point(217, 372);
-            this.MotorREV.Name = "MotorREV";
-            this.MotorREV.Size = new System.Drawing.Size(110, 50);
-            this.MotorREV.TabIndex = 36;
-            this.MotorREV.Text = "Motor REV";
-            this.MotorREV.UseVisualStyleBackColor = false;
-            this.MotorREV.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // MotorStop
-            // 
-            this.MotorStop.BackColor = System.Drawing.Color.Red;
-            this.MotorStop.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.MotorStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.MotorStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MotorStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.MotorStop.Location = new System.Drawing.Point(137, 372);
-            this.MotorStop.Name = "MotorStop";
-            this.MotorStop.Size = new System.Drawing.Size(75, 50);
-            this.MotorStop.TabIndex = 37;
-            this.MotorStop.Text = "Motor Stop";
-            this.MotorStop.UseVisualStyleBackColor = false;
-            this.MotorStop.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // ostatustext
-            // 
-            this.ostatustext.Location = new System.Drawing.Point(88, 452);
-            this.ostatustext.Name = "ostatustext";
-            this.ostatustext.Size = new System.Drawing.Size(100, 20);
-            this.ostatustext.TabIndex = 38;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 455);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 13);
-            this.label8.TabIndex = 39;
-            this.label8.Text = "Status outputa";
+            this.timer_auto.Tick += new System.EventHandler(this.timer_auto_Tick);
             // 
             // TKK
             // 
@@ -724,6 +783,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            this.panel_manual.ResumeLayout(false);
+            this.panel_debug.ResumeLayout(false);
+            this.panel_debug.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -790,6 +852,11 @@
         private System.Windows.Forms.Button MotorStop;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox ostatustext;
+        private System.Windows.Forms.Panel panel_manual;
+        private System.Windows.Forms.Panel panel_debug;
+        private System.Windows.Forms.Button btn_ispON;
+        private System.Windows.Forms.Button btn_ispOFF;
+        private System.Windows.Forms.Timer timer_auto;
     }
 }
 

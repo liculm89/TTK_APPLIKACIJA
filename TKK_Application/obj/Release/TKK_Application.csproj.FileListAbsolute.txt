@@ -6,3 +6,12 @@ D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\ob
 D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Release\TKK_Application.csproj.GenerateResource.Cache
 D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Release\TKK_Application.exe
 D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Release\TKK_Application.pdb
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Release\TKK_Application.exe.manifest
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Release\TKK_Application.application
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Release\TKK_Application.exe
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Release\TKK_Application.pdb
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Release\Automation.BDaq4.Design.dll
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\bin\Release\Automation.BDaq4.dll
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Release\TKK_Application.csprojResolveAssemblyReference.cache
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Release\TKK_Application.exe.manifest
+D:\N046_17 DOKUMENTACIJA I PROGRAM\Aplikacija\TKK_Application\TKK_Application\obj\Release\TKK_Application.application
