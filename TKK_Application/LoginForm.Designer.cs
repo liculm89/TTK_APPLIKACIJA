@@ -32,9 +32,11 @@
             this.passBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.loginBtn = new System.Windows.Forms.Button();
+            this.settingsBox = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.loginBtn = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.settingsBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -75,6 +77,30 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "LOZINKA:";
             // 
+            // loginBtn
+            // 
+            this.loginBtn.BackColor = System.Drawing.Color.LimeGreen;
+            this.loginBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.loginBtn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.loginBtn.Location = new System.Drawing.Point(12, 301);
+            this.loginBtn.Name = "loginBtn";
+            this.loginBtn.Size = new System.Drawing.Size(228, 48);
+            this.loginBtn.TabIndex = 7;
+            this.loginBtn.Text = "LOGIN";
+            this.loginBtn.UseVisualStyleBackColor = false;
+            this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
+            // 
+            // settingsBox
+            // 
+            this.settingsBox.BackgroundImage = global::TKK_Application.Properties.Resources.if_Control_Panel_51386;
+            this.settingsBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.settingsBox.Location = new System.Drawing.Point(13, 12);
+            this.settingsBox.Name = "settingsBox";
+            this.settingsBox.Size = new System.Drawing.Size(52, 51);
+            this.settingsBox.TabIndex = 8;
+            this.settingsBox.TabStop = false;
+            this.settingsBox.Click += new System.EventHandler(this.settingsBox_Click);
+            // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImage = global::TKK_Application.Properties.Resources.user_2;
@@ -97,26 +123,13 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // loginBtn
-            // 
-            this.loginBtn.BackColor = System.Drawing.Color.LawnGreen;
-            this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loginBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.loginBtn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.loginBtn.Location = new System.Drawing.Point(12, 301);
-            this.loginBtn.Name = "loginBtn";
-            this.loginBtn.Size = new System.Drawing.Size(228, 48);
-            this.loginBtn.TabIndex = 7;
-            this.loginBtn.Text = "LOGIN";
-            this.loginBtn.UseVisualStyleBackColor = false;
-            this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
-            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.ClientSize = new System.Drawing.Size(609, 362);
+            this.Controls.Add(this.settingsBox);
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label2);
@@ -125,9 +138,11 @@
             this.Controls.Add(this.passBox);
             this.Controls.Add(this.userBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximumSize = new System.Drawing.Size(625, 396);
             this.Name = "LoginForm";
             this.Text = "TKK LOGIN";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginForm_KeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.settingsBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -144,5 +159,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button loginBtn;
+        private System.Windows.Forms.PictureBox settingsBox;
     }
 }

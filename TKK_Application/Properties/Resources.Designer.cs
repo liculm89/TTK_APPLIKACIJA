@@ -123,6 +123,16 @@ namespace TKK_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap if_Control_Panel_51386 {
+            get {
+                object obj = ResourceManager.GetObject("if_Control_Panel_51386", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap login {
             get {
                 object obj = ResourceManager.GetObject("login", resourceCulture);
@@ -137,6 +147,16 @@ namespace TKK_Application.Properties {
             get {
                 object obj = ResourceManager.GetObject("molumen_red_round_error_warning_icon_2400px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum;Materijal;Los;Program;Operater
+        ///.
+        /// </summary>
+        internal static string ProcessLog {
+            get {
+                return ResourceManager.GetString("ProcessLog", resourceCulture);
             }
         }
         

@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Automation.BDaq;
+using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Data.OleDb;
+using System.IO;
+using System.IO.Ports;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO.Ports;
-using System.IO;
-using Automation.BDaq;
-using System.Threading;
-using Microsoft.VisualBasic.FileIO;
-using System.Data.OleDb;
-using System.Collections.Generic;
+
 
 
 namespace TKK_Application
@@ -24,11 +19,8 @@ namespace TKK_Application
         private StatusIO _statusIO;
         private string csvFileLoc;
         private string profileLoc;
-        
-        private SerialPort _serialPort;
-        //private Label[] m_portNum;
-        //private Label[] m_portHex;
-        //static string Db_Password = Globals.db_passwd;
+
+        private scannerControl scanner = new scannerControl();
 
         private const int m_startPort = 0;
         private const int m_portCountShow = 2;
@@ -39,9 +31,7 @@ namespace TKK_Application
         public string[] lbl_States = { "READY", "ACTIVE", "ERROR" };
 
         public DaqCtrlBase IOModule;
-
-        //public ErrorCode LoadProfile(string ss);
-
+        private static IOControl IO = new IOControl();
 
         public DataTable dt = new DataTable();
         private delegate void SetTextDeleg(string text);
@@ -49,7 +39,8 @@ namespace TKK_Application
         public TKK()
         {
             InitializeComponent();
-            panel_debug.Hide();
+            this.CenterToScreen();
+           // panel_debug.Hide();
            // lbl_States = {"READY", "ACTIVE", "ERROR"};
             csvFileLoc = @"D:\N046_17 DOKUMENTACIJA I PROGRAM\Res\Programi.csv";
             profileLoc = @"D:\N046_17 DOKUMENTACIJA I PROGRAM\Res\ioProfile.xml";
@@ -74,50 +65,36 @@ namespace TKK_Application
             #endregion Datagrid
 
             #region ScannerInit
-            _serialPort = new SerialPort("COM7", 9600, Parity.None, 8, StopBits.One);
-            _serialPort.Handshake = Handshake.RequestToSend;
-            _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
-            _serialPort.ReadTimeout = 110;
-            _serialPort.WriteTimeout = 110;
-            //_serialPort.DtrEnable = true;
 
-            Init_scanner_connection();
+            scanner.connectScanner("COM5", 9600, 8, 110, 110);
+            scanner.Init_scanner_connection();
+            scanner.DataRec += new scannerControl.dataRecHandler(scannerDataRec);
+            scannerStatus.Text = scanner.connectionStatus;
 
-            if (!(_serialPort.IsOpen))
-            {
-                scannerStatus.Text = "Scanner is not connected...";
-            }
             #endregion ScannerInit
 
             #region IOModul
 
-
-
-            //IOModule.LoadProfile(profileLoc);
-            
             instantDoCtrl1.SelectedDevice = new DeviceInformation(1);
             instantDiCtrl1.SelectedDevice = new DeviceInformation(1);
 
             instantDiCtrl1.LoadProfile(profileLoc);
-            
 
             if (!instantDoCtrl1.Initialized)
             {
-                MessageBox.Show("No device be selected or device open failed!", "StaticDO");
+                MessageBox.Show("No device is selected or device connection failed!", "StaticDO");
                 this.Close();
                 return;
             }
 
             if (!instantDiCtrl1.Initialized)
             {
-                MessageBox.Show("No device be selected or device open failed!", "StaticDI");
+                MessageBox.Show("No device is selected or device connection failed!", "StaticDI");
                 this.Close();
                 return;
             }
             InitializePortState();
-            // timer1.Start();
 
-            
 
             if (!instantDiCtrl1.Features.DiintSupported)
             {
@@ -135,11 +112,10 @@ namespace TKK_Application
             instantDiCtrl1.ChangeOfState += new EventHandler<DiSnapEventArgs>(DInputChanged);
             instantDiCtrl1.Interrupt += new EventHandler<DiSnapEventArgs>(instantDiCtrl_Interrupt);
 
-            //SnapStart();
-
             timer1.Start();
 
-            setOutput(0, 0);
+            IO.resetOutputs();
+            //setOutput(0, 0);
             #endregion IOModul
 
             lightReady.Image = imageList3.Images[0];
@@ -153,8 +129,6 @@ namespace TKK_Application
             {
                 setStatus(2);
             }
-
-
         }
 
         private void postavkeSkeneraToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -167,12 +141,12 @@ namespace TKK_Application
 
         public void instantDiCtrl_Interrupt(object sender, DiSnapEventArgs e)
         {
-            Console.WriteLine("\n DI port {0} status change interrupt occurred!", e.SrcNum);
+            //Console.WriteLine("\n DI port {0} status change interrupt occurred!", e.SrcNum);
         }
 
         public void DInputChanged(object sender, DiSnapEventArgs e)
         {
-            Console.WriteLine("\n DI port {0} status change interrupt occurred!", e.SrcNum);
+            //Console.WriteLine("\n DI port {0} status change interrupt occurred!", e.SrcNum);
         }
 
         private void InitializePortState()
@@ -195,7 +169,7 @@ namespace TKK_Application
                 {
                     portDir = (byte)instantDoCtrl1.Ports[i + ConstVal.StartPort].DirectionMask;
                 }
-                
+
             }
         }
 
@@ -206,7 +180,7 @@ namespace TKK_Application
                 MessageBox.Show("Sorry ! Some errors happened, the error code is: " + err.ToString());
             }
         }
-
+        #region Utility
         public static class ConstVal
         {
             public const int StartPort = 0;
@@ -262,6 +236,7 @@ namespace TKK_Application
             }
             #endregion
         }
+        #endregion Utility
 
         private void DO1_btn_Click(object sender, EventArgs e)
         {
@@ -299,9 +274,9 @@ namespace TKK_Application
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = DateTime.Now.ToString("MM-dd-yyyy h:mmtt:ss");
+            toolStripStatusLabel1.Text = DateTime.Now.ToString("MM-dd-yyyy HH:mmtt:ss");
             ScanInputStates();
-            
+
         }
 
         #region datagridMethods
@@ -347,9 +322,6 @@ namespace TKK_Application
         private void scannedCode_TextChanged(object sender, EventArgs e)
         {
             string searchValue = scannedCode.Text;
-
-            //searchValue = scannedCode.Text;
-
             int rowIndex = -1;
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -368,11 +340,6 @@ namespace TKK_Application
             {
                 dataGridView1.Rows[rowIndex].Selected = true;
             }
-
-            /* string columnName = "BARCODE";
-
-             string rowFilter = string.Format("[{0}] = '{1}'", columnName, searchValue);
-             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = rowFilter;*/
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -422,45 +389,21 @@ namespace TKK_Application
 
         private void connScanner_Click(object sender, EventArgs e)
         {
-            Init_scanner_connection();
+            scanner.Init_scanner_connection();
+            scannerStatus.Text = scanner.connectionStatus;
         }
 
-        void Init_scanner_connection()
+        public void scannerDataRec(object sender, EventArgs e)
         {
-            if (_serialPort.IsOpen)
+            if (this.InvokeRequired)
             {
-                //Console.WriteLine("Port is open");
-                _serialPort.Close();
-                scannerStatus.Text = "Scanner disconnected.";
-            }
-            else
-            {
-                try
+                this.Invoke(new EventHandler(delegate
                 {
-                    _serialPort.Open();
-                    Console.WriteLine("Port opened");
-                    scannerStatus.Text = "Scanner is connected.";
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error opening port: " + ex.Message);
-                }
+                    scannedCode.Text = ("");
+                    scannedCode.Text = scanner.result.Trim();
+                }));
+
             }
-        }
-
-        void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            Thread.Sleep(110);
-            Console.WriteLine("Press any key to continue...");
-            string data = _serialPort.ReadExisting().ToString();
-            //Console.WriteLine(data);
-            this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
-        }
-
-        private void si_DataReceived(string data)
-        {
-            scannedCode.Text = ("");
-            scannedCode.Text = data.Trim();
         }
         #endregion Scanner
 
@@ -469,7 +412,6 @@ namespace TKK_Application
         public void initCheck()
         {
             ScanInputStates();
-            //setOutput(0, 9);
             if (ChStates_port0[2] == '1')
             {
                 setStatus(0);
@@ -536,14 +478,15 @@ namespace TKK_Application
                 panel_manual.Hide();
                 btnStopAuto.Enabled = true;
             }
-            else {
+            else
+            {
                 MessageBox.Show("TOTAL STOP IS ACTIVE!", "TOTAL STOP ERROR");
 
             }
 
         }
 
-        private async void autmaticStop()
+        private async void automaticStop()
         {
             getOutputState();
             char[] newState = ChOutputStates_port0;
@@ -579,7 +522,7 @@ namespace TKK_Application
 
         private async void btnStopAuto_Click(object sender, EventArgs e)
         {
-            
+
             getOutputState();
             char[] newState = ChOutputStates_port0;
             string outputS = convertOutputToString(newState);
@@ -590,7 +533,7 @@ namespace TKK_Application
             outputS = convertOutputToString(newState);
             output = Convert.ToInt32(outputS, 2);
             setOutput(0, output);
-           
+
             await Task.Delay(2000);
 
             getOutputState();
@@ -628,7 +571,7 @@ namespace TKK_Application
         {
 
             lightReady.Image = imageList3.Images[state];
-            lblStatus.Text = lbl_States[state]; 
+            lblStatus.Text = lbl_States[state];
         }
 
         private void ScanInputStates()
@@ -644,23 +587,14 @@ namespace TKK_Application
                 HandleError(err);
                 return;
             }
-            
+
             ChStates_port0 = convertToArr(portData);
             string a = new string(ChStates_port0);
             inputsStatus.Text = a;
 
-           // Console.WriteLine(ChStates_port0[2]);
-           /* if (ChStates_port0[2] == '0')
-            {
-                //resetOutputs();
-                //Console.WriteLine("Total stop pressed");
-                setStatus(2);
-            }*/
-           // else if(chsate)
-
-            ErrorCode err1 = ErrorCode.Success;
-            err1 = instantDiCtrl1.Read(1, out portData);
-            if (err1 != ErrorCode.Success)
+            err = ErrorCode.Success;
+            err = instantDiCtrl1.Read(1, out portData);
+            if (err != ErrorCode.Success)
             {
                 timer1.Enabled = false;
                 HandleError(err);
@@ -669,9 +603,6 @@ namespace TKK_Application
             ChStates_port1 = convertToArr(portData);
             string b = new string(ChStates_port1);
             inputStatus1.Text = b;
-
-
-
             #endregion Inputs
 
             getOutputState();
@@ -680,7 +611,6 @@ namespace TKK_Application
 
         private async void resetOutputs()
         {
-
             getOutputState();
             char[] newState = ChOutputStates_port0;
             newState[3] = '0';
@@ -688,23 +618,17 @@ namespace TKK_Application
             string outputS = convertOutputToString(newState);
             int output = Convert.ToInt32(outputS, 2);
             setOutput(0, output);
-
-
             await Task.Delay(300);
             setOutput(0, 8);
-
-
             Console.WriteLine("Ouputs reseted");
         }
 
         private void getOutputState()
         {
-
             byte portData = 0;
             byte portDir = 0xFF;
             ErrorCode err = ErrorCode.Success;
             byte[] mask = instantDoCtrl1.Features.DoDataMask;
-
 
             err = instantDoCtrl1.Read(ConstVal.StartPort, out portData);
             if (err != ErrorCode.Success)
@@ -722,8 +646,7 @@ namespace TKK_Application
             Array.Reverse(ChOutputStates_port0);
             string outStats = new string(ChOutputStates_port0);
             ostatustext.Text = outStats;
-            
-            }
+        }
 
         private char[] convertToArr(int state)
         {
@@ -736,165 +659,57 @@ namespace TKK_Application
         private string convertOutputToString(char[] outputState)
         {
             string result = new string(outputState);
-            return result;           
+            return result;
         }
 
         //Separator 1. START
         private void button2_Click(object sender, EventArgs e)
         {
-            if (ChStates_port0[2] == '1')
-            {
-
-                getOutputState();
-                char[] newState = ChOutputStates_port0;
-                newState[5] = '1';
-                newState[4] = '1';
-
-                string outputS = convertOutputToString(newState);
-                int output = Convert.ToInt32(outputS, 2);
-                setOutput(0, output);
-            }
-            else
-            {
-                MessageBox.Show("TOTAL STOP IS ACTIVE!", "TOTAL STOP ERROR");
-
-            }
-
-            }
-
-
-
-        private async void button5_Click(object sender, EventArgs e)
-        {
-            getOutputState();
-            char[] newState = ChOutputStates_port0;
-            newState[2] = '0';
-            newState[3] = '1';
-            string outputS = convertOutputToString(newState);
-            int output = Convert.ToInt32(outputS, 2);
-            setOutput(0, output);
-
-            await Task.Delay(300);
-
-            getOutputState();
-            newState = ChOutputStates_port0;
-            newState[2] = '0';
-            newState[3] = '0';
-            outputS = convertOutputToString(newState);
-            output = Convert.ToInt32(outputS, 2);
-            setOutput(0, output);
+            IO.separator1Start();
         }
-
-
+      
         //Separator 1. STOP
         private void button3_Click(object sender, EventArgs e)
         {
-            getOutputState();
-            char[] newState = ChOutputStates_port0;
-            newState[5] = '0';
-            newState[4] = '0';
+            IO.separator1Stop();
+        }
 
-            string outputS = convertOutputToString(newState);
-            Console.WriteLine("OUTPUTS 1.korak :" + outputS);
-            int output = Convert.ToInt32(outputS, 2);
-            setOutput(0, output);
-
+        //Separator 2. Start
+        private void button5_Click(object sender, EventArgs e)
+        {
+            IO.separator2Start();
         }
 
         //Separator 2 Stop
-        private async void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            getOutputState();
-            char[] newState = ChOutputStates_port0;
-            newState[3] = '0';
-            newState[2] = '1';
-            string outputS = convertOutputToString(newState);
-            int output = Convert.ToInt32(outputS, 2);
-            setOutput(0, output);
-
-
-            await Task.Delay(300);
-
-            getOutputState();
-            newState = ChOutputStates_port0;
-            newState[3] = '0';
-            newState[2] = '0';
-            outputS = convertOutputToString(newState);
-            output = Convert.ToInt32(outputS, 2);
-            setOutput(0, output);
+            IO.separator2Stop();
         }
 
         //MOTOR FWD
         private void button6_Click(object sender, EventArgs e)
         {
-            if (ChStates_port0[2] == '1')
-            {
-                getOutputState();
-            char[] newState = ChOutputStates_port0;
-            newState[7] = '1';
-            newState[6] = '0';
-            string outputS = convertOutputToString(newState);
-            int output = Convert.ToInt32(outputS, 2);
-            setOutput(0, output);
-            }
-            else
-            {
-                MessageBox.Show("TOTAL STOP IS ACTIVE!", "TOTAL STOP ERROR");
-
-            }
+            IO.startMotorFWD();
         }
         //MOTOR STOP
         private void button8_Click(object sender, EventArgs e)
         {
-            getOutputState();
-            char[] newState = ChOutputStates_port0;
-            newState[7] = '0';
-            newState[6] = '0';
-            string outputS = convertOutputToString(newState);
-            int output = Convert.ToInt32(outputS, 2);
-            setOutput(0, output);
-
+            IO.stopAuto();
         }
         //MOTOR REV
         private void button7_Click(object sender, EventArgs e)
         {
-            if (ChStates_port0[2] == '1')
-            {
-                getOutputState();
-            char[] newState = ChOutputStates_port0;
-            newState[6] = '1';
-            newState[7] = '0';
-            string outputS = convertOutputToString(newState);
-            int output = Convert.ToInt32(outputS, 2);
-            setOutput(0, output);
+            IO.startMotorREV();
         }
-            else
-            {
-                MessageBox.Show("TOTAL STOP IS ACTIVE!", "TOTAL STOP ERROR");
-
-            }
-}
 
         private void btn_ispON_Click(object sender, EventArgs e)
         {
-            getOutputState();
-            char[] newState = ChOutputStates_port0;
-            newState[1] = '1';
-           // newState[7] = '0';
-            string outputS = convertOutputToString(newState);
-            int output = Convert.ToInt32(outputS, 2);
-            setOutput(0, output);
+            IO.ispuhivanjeOn();
         }
 
         private void btn_ispOFF_Click(object sender, EventArgs e)
         {
-            getOutputState();
-            char[] newState = ChOutputStates_port0;
-            newState[1] = '0';
-            // newState[7] = '0';
-            string outputS = convertOutputToString(newState);
-            int output = Convert.ToInt32(outputS, 2);
-            setOutput(0, output);
+            IO.ispuhivanjeOff();
         }
 
         private void timer_auto_Tick(object sender, EventArgs e)
@@ -906,15 +721,12 @@ namespace TKK_Application
                 Console.WriteLine("Total stop pressed");
                 setStatus(2);
                 timer_auto.Stop();
-                //setStatus(2);
             }
-            /*
-            if(ChStates_port0[0] == '0')
-            {
-                resetOutputs();
-                Console.WriteLine("Total stop pressed");
-                setStatus(2);
-            }*/
+        }
+
+        private void TKK_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

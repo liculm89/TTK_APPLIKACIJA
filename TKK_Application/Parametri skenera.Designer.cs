@@ -51,7 +51,7 @@
             // 
             this.com_combobox.FormattingEnabled = true;
             this.com_combobox.Location = new System.Drawing.Point(187, 20);
-            this.com_combobox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.com_combobox.Margin = new System.Windows.Forms.Padding(4);
             this.com_combobox.Name = "com_combobox";
             this.com_combobox.Size = new System.Drawing.Size(60, 24);
             this.com_combobox.TabIndex = 0;
@@ -109,7 +109,7 @@
             // connectScanner
             // 
             this.connectScanner.Location = new System.Drawing.Point(70, 219);
-            this.connectScanner.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.connectScanner.Margin = new System.Windows.Forms.Padding(4);
             this.connectScanner.Name = "connectScanner";
             this.connectScanner.Size = new System.Drawing.Size(219, 38);
             this.connectScanner.TabIndex = 7;
@@ -120,7 +120,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(107, 315);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(217, 22);
             this.textBox1.TabIndex = 8;
@@ -138,7 +138,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(187, 61);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(60, 22);
             this.textBox2.TabIndex = 10;
@@ -147,7 +147,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(188, 102);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(59, 22);
             this.textBox3.TabIndex = 11;
@@ -156,7 +156,7 @@
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(187, 142);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(60, 22);
             this.textBox4.TabIndex = 12;
@@ -165,7 +165,7 @@
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(188, 183);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(59, 22);
             this.textBox5.TabIndex = 13;
@@ -217,11 +217,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.ClientSize = new System.Drawing.Size(415, 395);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Parametri_skenera";
             this.Text = "Parametri_skenera";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Parametri_skenera_FormClosing);

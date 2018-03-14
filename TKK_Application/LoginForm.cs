@@ -14,14 +14,23 @@ namespace TKK_Application
 {
     public partial class LoginForm : Form
     {
+
+        public static UserForm UForm;
+
+        public static settingsEditor settingsEdit = new settingsEditor();
+        private static IOControl IO = new IOControl();
+
         public LoginForm()
         {
             InitializeComponent();
+            this.CenterToScreen();
             this.KeyPreview = true;
             // InitializeComponent();
             passBox.Text = "";
             passBox.PasswordChar = '*';
             passBox.MaxLength = 4;
+            //settingsBox.Hide();
+            IO.resetOutputs();
         }
 
         private void LoginForm_KeyDown(object sender, KeyEventArgs e)
@@ -40,11 +49,9 @@ namespace TKK_Application
 
         private bool test_connection(string db, string passwd)
         {
-
             try
             {
                 string conString = "Provider=Microsoft.ACE.OLEDB.12.0; Jet OLEDB:Database Password=" + passwd + "; Persist Security Info = False; Data Source=" + db + ";";
-
                 OleDbConnection con = new OleDbConnection(conString);
                 con.Open();
 
@@ -57,13 +64,11 @@ namespace TKK_Application
                 {
                     return false;
                 }
-
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
-
         }
 
         private void Login()
@@ -78,16 +83,13 @@ namespace TKK_Application
 
             if (check_connection)
             {
-                //string Db_Password = "0000";
                 string conString = "Provider=Microsoft.ACE.OLEDB.12.0; Jet OLEDB:Database Password=" + Db_Password + "; Persist Security Info = False; Data Source=" + database_loc + ";";
-
                 OleDbConnection con = new OleDbConnection(conString);
 
-                //String sql = "SELECT * FROM Login";
                 OleDbDataAdapter test = new OleDbDataAdapter("Select Count(*) From Login where user='" + userBox.Text + "' and password='" + passBox.Text + "'", con);
                 DataTable logins = new DataTable();
                 test.Fill(logins);
-
+                string username = userBox.Text;
 
                 if ((userBox.Text == "") || (passBox.Text == ""))
                 {
@@ -97,12 +99,24 @@ namespace TKK_Application
                 {
                     if (logins.Rows[0][0].ToString() == "1")
                     {
-                        Console.WriteLine("yast");
-                        //this.Close();
                         this.Hide();
-                        TKK Tkk_admin = new TKK();
-                        Tkk_admin.Show();
-                       // Application.Run(new TKK());
+                        UForm = new UserForm(username);
+                        UForm.Show();
+                        /*
+                        if(string.Equals(username, "admin", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("login succesfull");
+                            this.Hide();
+                            TKK Tkk_admin = new TKK();
+                            Tkk_admin.Show();
+                            // Application.Run(new TKK());
+                        }
+                        else
+                        {
+                            this.Hide();
+                            UForm = new UserForm(username);
+                            UForm.Show();
+                        }*/
                     }
                     else
                     {
@@ -117,6 +131,19 @@ namespace TKK_Application
 
             }
         }
-    
+
+        private void settingsBox_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                settingsEdit.Close();
+            }
+            catch
+            {
+
+            }
+            settingsEdit = new settingsEditor();
+            settingsEdit.Show();
+        }
     }
 }

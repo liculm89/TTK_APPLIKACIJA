@@ -11,17 +11,14 @@ using System.Configuration;
 using System.Management;
 using System.IO.Ports;
 using System.Threading;
-using Automation.BDaq;
+
 
 namespace TKK_Application
 {
     public partial class Parametri_skenera : Form
     {
         public SerialPort _serialPort;
-
-
         private delegate void SetTextDeleg(string text);
-
 
         public Parametri_skenera()
         {
@@ -33,10 +30,7 @@ namespace TKK_Application
             var name = System.Configuration.ConfigurationManager.AppSettings["name"];
             Console.WriteLine(name);
 
-            string[] ports = SerialPort.GetPortNames();
-
-            
-
+            string[] ports = SerialPort.GetPortNames();            
             Console.WriteLine("The following serial ports were found:");
 
             // Display each port name to the console.
@@ -46,14 +40,14 @@ namespace TKK_Application
                 Console.WriteLine(port);
             }
 
-            com_combobox.SelectedIndex = com_combobox.FindString("COM6");
+            com_combobox.SelectedIndex = com_combobox.FindString("COM5");
 
             //Console.ReadLine();
         }
 
         private void connectScanner_Click(object sender, EventArgs e)
         {
-            _serialPort = new SerialPort("COM6", 9600, Parity.None, 8, StopBits.One);
+            _serialPort = new SerialPort("COM7", 9600, Parity.None, 8, StopBits.One);
             _serialPort.Handshake = Handshake.RequestToSend;
             _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
             _serialPort.ReadTimeout = 110;
@@ -75,9 +69,8 @@ namespace TKK_Application
             }
         }
 
-        void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        public void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-
             Thread.Sleep(110);
             Console.WriteLine("Press any key to continue...");
             string data = _serialPort.ReadExisting().ToString();
@@ -101,8 +94,7 @@ namespace TKK_Application
             {
                 Console.WriteLine("no port is open");
             }
-
-        }
+       }
 
     }
 }

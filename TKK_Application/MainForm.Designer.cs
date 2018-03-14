@@ -59,6 +59,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.csvSelectFile = new System.Windows.Forms.Button();
@@ -90,16 +91,16 @@
             this.MotorFWD = new System.Windows.Forms.Button();
             this.stopSep2 = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.lightReady = new System.Windows.Forms.PictureBox();
             this.imageList3 = new System.Windows.Forms.ImageList(this.components);
             this.timer_auto = new System.Windows.Forms.Timer(this.components);
-            this.lightReady = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -107,7 +108,6 @@
             this.panel_debug.SuspendLayout();
             this.panel_manual.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lightReady)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -360,6 +360,18 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "READY";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackgroundImage = global::TKK_Application.Properties.Resources.sinel_logo;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 470);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(322, 58);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // dataGridView1
             // 
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
@@ -482,7 +494,7 @@
             this.panel_debug.Controls.Add(this.ostatustext);
             this.panel_debug.Controls.Add(this.label7);
             this.panel_debug.Controls.Add(this.inputStatus1);
-            this.panel_debug.Location = new System.Drawing.Point(11, 436);
+            this.panel_debug.Location = new System.Drawing.Point(3, 443);
             this.panel_debug.Name = "panel_debug";
             this.panel_debug.Size = new System.Drawing.Size(332, 100);
             this.panel_debug.TabIndex = 41;
@@ -543,7 +555,7 @@
             // 
             // btnStartAuto
             // 
-            this.btnStartAuto.BackColor = System.Drawing.Color.LawnGreen;
+            this.btnStartAuto.BackColor = System.Drawing.Color.LimeGreen;
             this.btnStartAuto.FlatAppearance.BorderColor = System.Drawing.Color.Green;
             this.btnStartAuto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnStartAuto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -589,7 +601,7 @@
             // 
             // btn_ispON
             // 
-            this.btn_ispON.BackColor = System.Drawing.Color.LawnGreen;
+            this.btn_ispON.BackColor = System.Drawing.Color.LimeGreen;
             this.btn_ispON.FlatAppearance.BorderColor = System.Drawing.Color.Green;
             this.btn_ispON.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btn_ispON.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -604,7 +616,7 @@
             // 
             // startSep1
             // 
-            this.startSep1.BackColor = System.Drawing.Color.LawnGreen;
+            this.startSep1.BackColor = System.Drawing.Color.LimeGreen;
             this.startSep1.FlatAppearance.BorderColor = System.Drawing.Color.Green;
             this.startSep1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.startSep1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -649,7 +661,7 @@
             // 
             // MotorREV
             // 
-            this.MotorREV.BackColor = System.Drawing.Color.LawnGreen;
+            this.MotorREV.BackColor = System.Drawing.Color.LimeGreen;
             this.MotorREV.FlatAppearance.BorderColor = System.Drawing.Color.Green;
             this.MotorREV.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.MotorREV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -664,7 +676,7 @@
             // 
             // startSep2
             // 
-            this.startSep2.BackColor = System.Drawing.Color.LawnGreen;
+            this.startSep2.BackColor = System.Drawing.Color.LimeGreen;
             this.startSep2.FlatAppearance.BorderColor = System.Drawing.Color.Green;
             this.startSep2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.startSep2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -679,7 +691,7 @@
             // 
             // MotorFWD
             // 
-            this.MotorFWD.BackColor = System.Drawing.Color.LawnGreen;
+            this.MotorFWD.BackColor = System.Drawing.Color.LimeGreen;
             this.MotorFWD.FlatAppearance.BorderColor = System.Drawing.Color.Green;
             this.MotorFWD.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.MotorFWD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -717,6 +729,15 @@
             this.lblStatus.TabIndex = 24;
             this.lblStatus.Text = "READY";
             // 
+            // lightReady
+            // 
+            this.lightReady.Location = new System.Drawing.Point(90, 3);
+            this.lightReady.Name = "lightReady";
+            this.lightReady.Size = new System.Drawing.Size(150, 150);
+            this.lightReady.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.lightReady.TabIndex = 21;
+            this.lightReady.TabStop = false;
+            // 
             // imageList3
             // 
             this.imageList3.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList3.ImageStream")));
@@ -728,27 +749,6 @@
             // timer_auto
             // 
             this.timer_auto.Tick += new System.EventHandler(this.timer_auto_Tick);
-            // 
-            // lightReady
-            // 
-            this.lightReady.Location = new System.Drawing.Point(90, 3);
-            this.lightReady.Name = "lightReady";
-            this.lightReady.Size = new System.Drawing.Size(150, 150);
-            this.lightReady.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.lightReady.TabIndex = 21;
-            this.lightReady.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackgroundImage = global::TKK_Application.Properties.Resources.sinel_logo;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 470);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(322, 58);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // TKK
             // 
@@ -762,8 +762,10 @@
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(1121, 624);
             this.Name = "TKK";
             this.Text = "TKK";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TKK_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -775,6 +777,7 @@
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -785,7 +788,6 @@
             this.panel_debug.PerformLayout();
             this.panel_manual.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lightReady)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

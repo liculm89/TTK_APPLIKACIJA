@@ -23,36 +23,27 @@ namespace TKK_Application.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("\"G:\\2017\\database_access.accdb\"")]
         public string db_loc {
             get {
                 return ((string)(this["db_loc"]));
             }
+            set {
+                this["db_loc"] = value;
+            }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"G:\\2017\\N046_17 DOKUMENTACIJA I PROGRAM\\ARHIVA\"")]
         public string archive_loc {
             get {
                 return ((string)(this["archive_loc"]));
             }
             set {
                 this["archive_loc"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Export_folder {
-            get {
-                return ((string)(this["Export_folder"]));
-            }
-            set {
-                this["Export_folder"] = value;
             }
         }
         
@@ -65,6 +56,54 @@ namespace TKK_Application.Properties {
             }
             set {
                 this["db_passwd"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"G:\\2017\\N046_17 DOKUMENTACIJA I PROGRAM\\Res\\Programi.csv\"")]
+        public string csvInput_loc {
+            get {
+                return ((string)(this["csvInput_loc"]));
+            }
+            set {
+                this["csvInput_loc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string IOdeviceNum {
+            get {
+                return ((string)(this["IOdeviceNum"]));
+            }
+            set {
+                this["IOdeviceNum"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM5")]
+        public string ScannerCOM {
+            get {
+                return ((string)(this["ScannerCOM"]));
+            }
+            set {
+                this["ScannerCOM"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"G:\\2017\\N046_17 DOKUMENTACIJA I PROGRAM\\Res\\ProcessLog.csv\"")]
+        public string archiveTemplate {
+            get {
+                return ((string)(this["archiveTemplate"]));
+            }
+            set {
+                this["archiveTemplate"] = value;
             }
         }
     }

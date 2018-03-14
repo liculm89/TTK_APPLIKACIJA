@@ -9,16 +9,12 @@ namespace TKK_Application
 
     public static class Globals
     {
-        //public static string rezultat;
         public static string database_loc = Properties.Settings.Default["db_loc"].ToString();
-        public static string archive_loc = Properties.Settings.Default["archive_loc"].ToString();
-        public static string export_folder = Properties.Settings.Default["Export_folder"].ToString();
         public static string db_passwd = Properties.Settings.Default["db_passwd"].ToString();
-
-        //public static string external_archive_loc = Properties.Settings.Default["external_archive_loc"].ToString();
-        //public static string timeout_counter = Properties.Settings.Default["timeout_counter"].ToString();
-        //public static string trigger_timer = Properties.Settings.Default["trigger"].ToString();
-
+        public static string archive_loc = Properties.Settings.Default["archive_loc"].ToString();
+        public static string IOid = Properties.Settings.Default["IOdeviceNum"].ToString();
+        public static string scannerCOM = Properties.Settings.Default["ScannerCOM"].ToString();
+        public static string csvInput = Properties.Settings.Default["csvInput_loc"].ToString();
     }
 
 
@@ -27,16 +23,12 @@ namespace TKK_Application
 
         public static void update_globals()
         {
-
             Globals.database_loc = Properties.Settings.Default["db_loc"].ToString();
             Globals.archive_loc = Properties.Settings.Default["archive_loc"].ToString();
-            Globals.export_folder = Properties.Settings.Default["Export_folder"].ToString();
             Globals.db_passwd = Properties.Settings.Default["db_passwd"].ToString();
-
-            //Globals.external_archive_loc = Properties.Settings.Default["external_archive_loc"].ToString();
-            //Globals.timeout_counter = Properties.Settings.Default["timeout_counter"].ToString();
-            //Globals.trigger_timer = Properties.Settings.Default["trigger"].ToString();
-
+            Globals.IOid = Properties.Settings.Default["IOdeviceNum"].ToString();
+            Globals.scannerCOM = Properties.Settings.Default["ScannerCOM"].ToString();
+            Globals.csvInput = Properties.Settings.Default["csvInput_loc"].ToString();
         }
         /// <summary>
         /// The main entry point for the application.
