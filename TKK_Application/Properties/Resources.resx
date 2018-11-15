@@ -118,49 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="glossy_darkgray_button_2400px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glossy-darkgray-button-2400px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="green_dot1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\green_dot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glossy_green_button_2400px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glossy-green-button-2400px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="user_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="glossy_red_button_2400px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glossy-red-button-2400px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="glossy_red_button_2400px_2_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glossy-red-button-2400px(2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="arrow_fwd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow_fwd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="glossy_yellow_button_2400px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glossy-yellow-button-2400px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="green_dot1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\green_dot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="molumen_red_round_error_warning_icon_2400px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\molumen-red-round-error-warning-icon-2400px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="if_Control_Panel_51386" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\if_Control Panel_51386.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="login" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\login.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="molumen_red_round_error_warning_icon_2400px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\molumen-red-round-error-warning-icon-2400px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ProcessLog" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProcessLog.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
-  </data>
   <data name="red_dot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\yast-red-dot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="red_dot1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\red_dot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="sinel_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sinel logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="user_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\user_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="red_dot1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\red_dot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProcessLog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProcessLog.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="arrow_rev_35_35" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow_rev_35_35.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="user_login_pic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user_login_pic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_fwd_50_50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow_fwd_50_50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="glossy_darkgray_button_2400px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glossy-darkgray-button-2400px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_fwd_35_35" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow_fwd_35_35.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="glossy_red_button_2400px_2_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glossy-red-button-2400px(2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ioProfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ioProfile.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="login" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\login.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="stop_35_35" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stop_35_35.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="log_512" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\log-512.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

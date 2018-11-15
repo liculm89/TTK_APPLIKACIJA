@@ -3,25 +3,35 @@
   <Profiles />
   <Settings>
     <Setting Name="db_loc" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"G:\2017\database_access.accdb"</Value>
+      <Value Profile="(Default)">'D:\N046_17 DOKUMENTACIJA I PROGRAM\Res\database_access.accdb'</Value>
     </Setting>
     <Setting Name="archive_loc" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\ARHIVA"</Value>
+      <Value Profile="(Default)">D:\Arhiva\ARHIVA</Value>
     </Setting>
     <Setting Name="db_passwd" Type="System.String" Scope="User">
       <Value Profile="(Default)">0000</Value>
     </Setting>
     <Setting Name="csvInput_loc" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Res\Programi.csv"</Value>
+      <Value Profile="(Default)">'D:\N046_17 DOKUMENTACIJA I PROGRAM\PROGRAMI\Transporter.csv'</Value>
     </Setting>
     <Setting Name="IOdeviceNum" Type="System.String" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="ScannerCOM" Type="System.String" Scope="User">
-      <Value Profile="(Default)">COM5</Value>
+      <Value Profile="(Default)">COM8</Value>
     </Setting>
     <Setting Name="archiveTemplate" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"G:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Res\ProcessLog.csv"</Value>
+      <Value Profile="(Default)">"D:\2017\N046_17 DOKUMENTACIJA I PROGRAM\Res\ProcessLog.csv"</Value>
+    </Setting>
+    <Setting Name="LogPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">'D:\N046_17 DOKUMENTACIJA I PROGRAM\LOGS'</Value>
+    </Setting>
+    <Setting Name="stopTimerTime" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5000</Value>
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+        </Value>
     </Setting>
   </Settings>
 </SettingsFile>

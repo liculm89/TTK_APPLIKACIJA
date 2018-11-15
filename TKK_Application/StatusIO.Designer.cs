@@ -87,6 +87,7 @@
             this.pictureBox26 = new System.Windows.Forms.PictureBox();
             this.pictureBox25 = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label28 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -108,7 +109,6 @@
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.label28 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -269,7 +269,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(49, 100);
+            this.label24.Location = new System.Drawing.Point(49, 125);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(108, 15);
             this.label24.TabIndex = 60;
@@ -278,7 +278,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(49, 67);
+            this.label23.Location = new System.Drawing.Point(49, 92);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(112, 15);
             this.label23.TabIndex = 59;
@@ -742,6 +742,15 @@
             this.panel5.Size = new System.Drawing.Size(162, 358);
             this.panel5.TabIndex = 51;
             // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(42, 253);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(109, 16);
+            this.label28.TabIndex = 57;
+            this.label28.Text = "Ispuhivanje trake";
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -935,15 +944,6 @@
             this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList2.Images.SetKeyName(0, "glossy-darkgray-button-md.png");
             this.imageList2.Images.SetKeyName(1, "glossy-green-button-md.png");
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(42, 253);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(109, 16);
-            this.label28.TabIndex = 57;
-            this.label28.Text = "Ispuhivanje trake";
             // 
             // StatusIO
             // 

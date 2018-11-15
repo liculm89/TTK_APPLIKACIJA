@@ -31,7 +31,7 @@ namespace TKK_Application
         public string[] lbl_States = { "READY", "ACTIVE", "ERROR" };
 
         public DaqCtrlBase IOModule;
-        private static IOControl IO = new IOControl();
+        //private static IOControl IO = new IOControl();
 
         public DataTable dt = new DataTable();
         private delegate void SetTextDeleg(string text);
@@ -114,7 +114,7 @@ namespace TKK_Application
 
             timer1.Start();
 
-            IO.resetOutputs();
+            Globals.IOCtrl.resetOutputs();
             //setOutput(0, 0);
             #endregion IOModul
 
@@ -141,12 +141,12 @@ namespace TKK_Application
 
         public void instantDiCtrl_Interrupt(object sender, DiSnapEventArgs e)
         {
-            //Console.WriteLine("\n DI port {0} status change interrupt occurred!", e.SrcNum);
+           
         }
 
         public void DInputChanged(object sender, DiSnapEventArgs e)
         {
-            //Console.WriteLine("\n DI port {0} status change interrupt occurred!", e.SrcNum);
+          
         }
 
         private void InitializePortState()
@@ -665,51 +665,51 @@ namespace TKK_Application
         //Separator 1. START
         private void button2_Click(object sender, EventArgs e)
         {
-            IO.separator1Start();
+            Globals.IOCtrl.separator1Start();
         }
       
         //Separator 1. STOP
         private void button3_Click(object sender, EventArgs e)
         {
-            IO.separator1Stop();
+            Globals.IOCtrl.separator1Stop();
         }
 
         //Separator 2. Start
         private void button5_Click(object sender, EventArgs e)
         {
-            IO.separator2Start();
+            Globals.IOCtrl.separator2Start();
         }
 
         //Separator 2 Stop
         private void button4_Click(object sender, EventArgs e)
         {
-            IO.separator2Stop();
+            Globals.IOCtrl.separator2Stop();
         }
 
         //MOTOR FWD
         private void button6_Click(object sender, EventArgs e)
         {
-            IO.startMotorFWD();
+            Globals.IOCtrl.startMotorFWD();
         }
         //MOTOR STOP
         private void button8_Click(object sender, EventArgs e)
         {
-            IO.stopAuto();
+            Globals.IOCtrl.stopAuto();
         }
         //MOTOR REV
         private void button7_Click(object sender, EventArgs e)
         {
-            IO.startMotorREV();
+            Globals.IOCtrl.startMotorREV();
         }
 
         private void btn_ispON_Click(object sender, EventArgs e)
         {
-            IO.ispuhivanjeOn();
+            Globals.IOCtrl.ispuhivanjeOn();
         }
 
         private void btn_ispOFF_Click(object sender, EventArgs e)
         {
-            IO.ispuhivanjeOff();
+            Globals.IOCtrl.ispuhivanjeOff();
         }
 
         private void timer_auto_Tick(object sender, EventArgs e)

@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace TKK_Application
 {
-    class scannerControl
+    public class scannerControl
     {
         public SerialPort _serialPort;
         public string result;
@@ -77,10 +77,17 @@ namespace TKK_Application
 
         public void closeConnection()
         {
-            if (_serialPort.IsOpen)
+            try
             {
-                _serialPort.Close();
-                Console.WriteLine("Connection Closed");
+                if (_serialPort.IsOpen)
+                {
+                    _serialPort.Close();
+                    Console.WriteLine("Connection Closed");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error closing connection"  + ex.ToString());
             }
         }
 

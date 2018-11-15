@@ -25,7 +25,7 @@ namespace TKK_Application.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"G:\\2017\\database_access.accdb\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\'D:\\N046_17 DOKUMENTACIJA I PROGRAM\\Res\\database_access.accdb\'")]
         public string db_loc {
             get {
                 return ((string)(this["db_loc"]));
@@ -37,7 +37,7 @@ namespace TKK_Application.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"G:\\2017\\N046_17 DOKUMENTACIJA I PROGRAM\\ARHIVA\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Arhiva\\ARHIVA")]
         public string archive_loc {
             get {
                 return ((string)(this["archive_loc"]));
@@ -61,7 +61,7 @@ namespace TKK_Application.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"G:\\2017\\N046_17 DOKUMENTACIJA I PROGRAM\\Res\\Programi.csv\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\'D:\\N046_17 DOKUMENTACIJA I PROGRAM\\PROGRAMI\\Transporter.csv\'")]
         public string csvInput_loc {
             get {
                 return ((string)(this["csvInput_loc"]));
@@ -85,7 +85,7 @@ namespace TKK_Application.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM8")]
         public string ScannerCOM {
             get {
                 return ((string)(this["ScannerCOM"]));
@@ -97,13 +97,49 @@ namespace TKK_Application.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"G:\\2017\\N046_17 DOKUMENTACIJA I PROGRAM\\Res\\ProcessLog.csv\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"D:\\2017\\N046_17 DOKUMENTACIJA I PROGRAM\\Res\\ProcessLog.csv\"")]
         public string archiveTemplate {
             get {
                 return ((string)(this["archiveTemplate"]));
             }
             set {
                 this["archiveTemplate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\'D:\\N046_17 DOKUMENTACIJA I PROGRAM\\LOGS\'")]
+        public string LogPath {
+            get {
+                return ((string)(this["LogPath"]));
+            }
+            set {
+                this["LogPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        public string stopTimerTime {
+            get {
+                return ((string)(this["stopTimerTime"]));
+            }
+            set {
+                this["stopTimerTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Setting {
+            get {
+                return ((string)(this["Setting"]));
+            }
+            set {
+                this["Setting"] = value;
             }
         }
     }

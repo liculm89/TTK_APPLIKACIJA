@@ -15,6 +15,7 @@ Global
 		{843BE574-A48A-489E-AB3A-68C1D713DCAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{843BE574-A48A-489E-AB3A-68C1D713DCAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{843BE574-A48A-489E-AB3A-68C1D713DCAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{843BE574-A48A-489E-AB3A-68C1D713DCAD}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

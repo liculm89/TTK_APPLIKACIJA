@@ -16,7 +16,7 @@ namespace TKK_Application
 {
     public partial class settingsEditor : Form
     {
-        public string[] keys = new string[6];
+        public string[] keys = new string[7];
         public SerialPort _serialPort;
 
         public settingsEditor()
@@ -29,6 +29,7 @@ namespace TKK_Application
             keys[3] = "csvInput_loc";
             keys[4] = "IOdeviceNum";
             keys[5] = "ScannerCOM";
+            keys[6] = "stopTimerTime";
             //keys[6] = "archiveTemplate";
             populate();
         }
@@ -41,6 +42,7 @@ namespace TKK_Application
             passwdBox.Text = Properties.Settings.Default[keys[2]].ToString();
             programListBox.Text = Properties.Settings.Default[keys[3]].ToString();
             deviceIDBox.Text = Properties.Settings.Default[keys[4]].ToString();
+            stopTimerBox.Text = Properties.Settings.Default[keys[6]].ToString();
 
             string[] ports = SerialPort.GetPortNames();
             foreach (string port in ports)
@@ -102,7 +104,7 @@ namespace TKK_Application
             Console.WriteLine("Saving changes");
 
             string[] values = new string[] { userDBtext.Text, archiveLocBox.Text, passwdBox.Text,
-                programListBox.Text, deviceIDBox.Text.ToString(), comBox.SelectedItem.ToString() };
+                programListBox.Text, deviceIDBox.Text.ToString(), comBox.SelectedItem.ToString(), stopTimerBox.Text.ToString() };
 
             Console.WriteLine(values);
 
@@ -110,7 +112,7 @@ namespace TKK_Application
             {
                 try
                 {
-                    Console.WriteLine("update" + keys[i].ToString());
+                    Console.WriteLine("update: " + keys[i].ToString());
                     AddUpdateAppSettings(keys[i], values[i]);
                 }
                 catch (ConfigurationErrorsException ex)
@@ -119,7 +121,14 @@ namespace TKK_Application
                 }
             }
 
-            Program.update_globals();
+            try
+            {
+                Program.update_globals();
+            }
+            catch
+            {
+
+            }
         }
     }
 }

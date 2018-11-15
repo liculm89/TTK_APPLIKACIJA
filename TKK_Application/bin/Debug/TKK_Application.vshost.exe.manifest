@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TKK_Application.exe" size="8741328">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TKK_Application.exe" size="10035152">
       <assemblyIdentity name="TKK_Application" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>V3x18Pbm4oASt7VxyKEoUznHe4GNH+4rM31jB2uivYc=</dsig:DigestValue>
+        <dsig:DigestValue>H6N1r75ERwENxjmWjS5XRBN6sjLKeVtj0+SlEVrP9Ts=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -87,13 +87,13 @@
       <dsig:DigestValue>DTzKQUdO68cZAjI64QUApxVdKLpIcdjbZGvhu1c4ApM=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="TKK_Application.exe.config" size="2866">
+  <file name="TKK_Application.exe.config" size="3005">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>jWlPyr0ekS1930t85qx/y6tjePweoedqF9cAQ+2zuDo=</dsig:DigestValue>
+      <dsig:DigestValue>Be2t+ov7u7TbUsCjP4VNV12re8Q5y0WGRuCovlKwPHo=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

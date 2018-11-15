@@ -63,6 +63,46 @@ namespace TKK_Application.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrow_fwd {
+            get {
+                object obj = ResourceManager.GetObject("arrow_fwd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_fwd_35_35 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_fwd_35_35", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_fwd_50_50 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_fwd_50_50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_rev_35_35 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_rev_35_35", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap glossy_darkgray_button_2400px {
             get {
                 object obj = ResourceManager.GetObject("glossy_darkgray_button_2400px", resourceCulture);
@@ -131,6 +171,35 @@ namespace TKK_Application.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        ///&lt;DAQNavi Version=&quot;3.2.1.0&quot; Profile=&quot;1.0.0.0&quot;&gt;
+        ///    &lt;DaqDevice ModuleIndex=&quot;0&quot;&gt;
+        ///        &lt;Property ID=&quot;8&quot;&gt;
+        ///            &lt;Description&gt;Product ID:&lt;/Description&gt;
+        ///            &lt;Attribute&gt;0&lt;/Attribute&gt;
+        ///            &lt;Type&gt;2&lt;/Type&gt;
+        ///            &lt;EnumType&gt;ProductId&lt;/EnumType&gt;
+        ///            &lt;Tip&gt;Product ID is used to represent a DAQ Device model and distinguish devices of different models. Each device model owns an unique Product ID.&lt;/Tip&gt;
+        ///            &lt;Value&gt;210&lt;/Value&gt;
+        ///       [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ioProfile {
+            get {
+                return ResourceManager.GetString("ioProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap log_512 {
+            get {
+                object obj = ResourceManager.GetObject("log_512", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap login {
@@ -186,6 +255,16 @@ namespace TKK_Application.Properties {
         internal static System.Drawing.Bitmap sinel_logo {
             get {
                 object obj = ResourceManager.GetObject("sinel_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stop_35_35 {
+            get {
+                object obj = ResourceManager.GetObject("stop_35_35", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

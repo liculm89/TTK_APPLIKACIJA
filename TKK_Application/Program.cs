@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace TKK_Application
 {
 
@@ -15,11 +16,19 @@ namespace TKK_Application
         public static string IOid = Properties.Settings.Default["IOdeviceNum"].ToString();
         public static string scannerCOM = Properties.Settings.Default["ScannerCOM"].ToString();
         public static string csvInput = Properties.Settings.Default["csvInput_loc"].ToString();
+        public static string stopTimerInt = Properties.Settings.Default["stopTimerTime"].ToString();
+        //   public static string LogPath = Properties.Settings.Default["LogPath"].ToString();
+
+        public static processCollector pCol = new processCollector();
+        public static IOControl IOCtrl = new IOControl();
+        public static scannerControl Scnr = new scannerControl();
+
     }
 
 
     static class Program
     {
+        
 
         public static void update_globals()
         {
@@ -29,6 +38,7 @@ namespace TKK_Application
             Globals.IOid = Properties.Settings.Default["IOdeviceNum"].ToString();
             Globals.scannerCOM = Properties.Settings.Default["ScannerCOM"].ToString();
             Globals.csvInput = Properties.Settings.Default["csvInput_loc"].ToString();
+            
         }
         /// <summary>
         /// The main entry point for the application.
@@ -36,11 +46,19 @@ namespace TKK_Application
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new TKK());
             update_globals();
-            Application.Run(new LoginForm());
+
+            try
+            {
+                 Application.Run(new LoginForm());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Can't start Application: " + ex.ToString());
+            }
         }
     }
 }
