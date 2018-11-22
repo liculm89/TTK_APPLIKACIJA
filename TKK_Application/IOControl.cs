@@ -155,6 +155,12 @@ namespace TKK_Application
             rotationDirection = "0";
             stopTimerInterval = Int32.Parse(Globals.stopTimerInt);
 
+            /*
+            refreshDeviceTimer = new Timer();
+            refreshDeviceTimer.Interval = 400;
+            refreshDeviceTimer.Tick += new EventHandler(refreshIODevice);
+            refreshDeviceTimer.Start();
+            */
             Belt_counter = 0;
             Belt_counterOld = 0;
             tickCount = 0;
@@ -212,56 +218,14 @@ namespace TKK_Application
             AutoModeON = false;
             //Belt_counter = 0;
             //Belt_counterOld = 0;
-            refreshDeviceTimer = new Timer();
-            refreshDeviceTimer.Interval = 500;
-            refreshDeviceTimer.Tick += new EventHandler(refreshIODevice);
-            refreshDeviceTimer.Start();
-
 
         }
 
         public void refreshIODevice(object sender, EventArgs e)
         {
-            refreshDeviceTimer.Stop();
-            try
-            {
-                //stopTimer();
-                instantDiCtrl1.Dispose();
-                instantDoCtrl1.Dispose();
-            }
-            catch
-            {
-                Console.WriteLine("Timer not started");
-            }
-
-            try
-            {
-                //Kreiranje objekata za upravljanje I/O uređajem
-                instantDoCtrl1.SelectedDevice = new DeviceInformation(1);
-                instantDiCtrl1.SelectedDevice = new DeviceInformation(1);
-
-                //Učitavanja profila I/O Modula
-                IOprofile = "D:/N046_17 DOKUMENTACIJA I PROGRAM/Res/ioProfile.xml";
-
-                //Provjera učitavanja profila
-                ErrorCode errProfile = ErrorCode.Success;
-                errProfile = instantDiCtrl1.LoadProfile(IOprofile);
-                if (errProfile != ErrorCode.Success)
-                {
-                    HandleError(errProfile);
-                }
-                else
-                {
-                    Globals.pCol.writeLog(0, "I/O card profile loaded", "");
-                }
-            }
-
-            catch (Exception ex)
-            {
-                Globals.pCol.writeLog(2, "I/O card not ready", "");
-                MessageBox.Show("Device not ready: " + ex.ToString());
-                return;
-            }
+            //refreshDeviceTimer.Stop();
+            //Console.WriteLine("Forcing IO device refresh");
+            //forceRefresh();
         }
 
         #endregion AUTOMATIKA
@@ -331,6 +295,9 @@ namespace TKK_Application
         //Skeniranje i konverzija stanja I/O modula
         public void ScanStates()
         {
+
+            forceRefresh();
+
             try
             {
                 #region Inputs
@@ -604,6 +571,51 @@ namespace TKK_Application
         #endregion IOMethods
 
         #region Utility
+
+
+
+        public void forceRefresh()
+        {
+            try
+            {
+                instantDiCtrl1.Dispose();
+                instantDoCtrl1.Dispose();
+            }
+            catch
+            {
+                Console.WriteLine("Timer not started");
+            }
+
+            try
+            {
+                //Kreiranje objekata za upravljanje I/O uređajem
+                instantDoCtrl1.SelectedDevice = new DeviceInformation(1);
+                instantDiCtrl1.SelectedDevice = new DeviceInformation(1);
+
+                //Učitavanja profila I/O Modula
+                IOprofile = "D:/N046_17 DOKUMENTACIJA I PROGRAM/Res/ioProfile.xml";
+
+                //Provjera učitavanja profila
+                ErrorCode errProfile = ErrorCode.Success;
+                errProfile = instantDiCtrl1.LoadProfile(IOprofile);
+                if (errProfile != ErrorCode.Success)
+                {
+                    HandleError(errProfile);
+                }
+                else
+                {
+                    // Globals.pCol.writeLog(0, "I/O card profile loaded", "");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                //Globals.pCol.writeLog(2, "I/O card not ready", "");
+                refreshDeviceTimer.Stop();
+                MessageBox.Show("Device not ready: " + ex.ToString());
+                return;
+            }
+        }
 
         public void updateStatus(object sender, EventArgs e)
         {
