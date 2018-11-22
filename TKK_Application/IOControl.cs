@@ -18,7 +18,7 @@ namespace TKK_Application
          * instantDoCtrl1 - Digital outputs
          * instantDiCtrl1 - Digital inputs
         */
-        public InstantDoCtrl instantDoCtrl1; 
+        public InstantDoCtrl instantDoCtrl1;
         public InstantDiCtrl instantDiCtrl1;
         public string IOprofile;
 
@@ -40,7 +40,7 @@ namespace TKK_Application
         public char[] ChOutputStates_port0;
 
         //public System.ComponentModel.IContainer components = null;
- 
+
 
         /*
          * Popis timera za koji se koriste kao delay prilikom uključivanja i isključivanja periferije
@@ -58,6 +58,7 @@ namespace TKK_Application
         public System.Windows.Forms.Timer sep2StartTimer;
         public System.Windows.Forms.Timer sep2StopTimer;
         public System.Windows.Forms.Timer resetTimer;
+        public System.Windows.Forms.Timer refreshDeviceTimer;
         private static object locker = new Object();
 
         #region Tags
@@ -74,7 +75,7 @@ namespace TKK_Application
 
         public bool MotorRunning;
         //private EventArgs e = null;
-        
+
         public bool Tag_sep2_RDY;
         public bool Tag_sep2_ACTIVE;
         public bool AutoModeON;
@@ -92,7 +93,7 @@ namespace TKK_Application
         public IOControl()
         {
             Console.WriteLine("New IOcontrol object created");
-            
+
             instantDiCtrl1 = new InstantDiCtrl();
             instantDoCtrl1 = new InstantDoCtrl();
 
@@ -200,7 +201,7 @@ namespace TKK_Application
             autoStopTimer = new Timer();
             autoStopTimer.Interval = stopTimerInterval;
             autoStopTimer.Tick += new EventHandler(stopAutoDelayed);
-            autoStopTimer.Start();          
+            autoStopTimer.Start();
         }
 
         public void stopAutoDelayed(object sender, EventArgs e)
@@ -209,8 +210,58 @@ namespace TKK_Application
             stopMotor();
             ispuhivanjeOff();
             AutoModeON = false;
-            Belt_counter = 0;
-            Belt_counterOld = 0;
+            //Belt_counter = 0;
+            //Belt_counterOld = 0;
+            refreshDeviceTimer = new Timer();
+            refreshDeviceTimer.Interval = 500;
+            refreshDeviceTimer.Tick += new EventHandler(refreshIODevice);
+            refreshDeviceTimer.Start();
+
+
+        }
+
+        public void refreshIODevice(object sender, EventArgs e)
+        {
+            refreshDeviceTimer.Stop();
+            try
+            {
+                //stopTimer();
+                instantDiCtrl1.Dispose();
+                instantDoCtrl1.Dispose();
+            }
+            catch
+            {
+                Console.WriteLine("Timer not started");
+            }
+
+            try
+            {
+                //Kreiranje objekata za upravljanje I/O uređajem
+                instantDoCtrl1.SelectedDevice = new DeviceInformation(1);
+                instantDiCtrl1.SelectedDevice = new DeviceInformation(1);
+
+                //Učitavanja profila I/O Modula
+                IOprofile = "D:/N046_17 DOKUMENTACIJA I PROGRAM/Res/ioProfile.xml";
+
+                //Provjera učitavanja profila
+                ErrorCode errProfile = ErrorCode.Success;
+                errProfile = instantDiCtrl1.LoadProfile(IOprofile);
+                if (errProfile != ErrorCode.Success)
+                {
+                    HandleError(errProfile);
+                }
+                else
+                {
+                    Globals.pCol.writeLog(0, "I/O card profile loaded", "");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Globals.pCol.writeLog(2, "I/O card not ready", "");
+                MessageBox.Show("Device not ready: " + ex.ToString());
+                return;
+            }
         }
 
         #endregion AUTOMATIKA
@@ -222,23 +273,24 @@ namespace TKK_Application
 
             //private static object locker = new Object();
 
-           // lock (locker)
-           // {
-                try
+            //lock (locker)
+            //{
+            try
+            {
+                ErrorCode err = ErrorCode.Success;
+                err = instantDoCtrl1.Write(portNum, (byte)state);
+                if (err != ErrorCode.Success)
                 {
-                    ErrorCode err = ErrorCode.Success;
-                    err = instantDoCtrl1.Write(portNum, (byte)state);
-                    if (err != ErrorCode.Success)
-                    {
-                        HandleError(err);
-                    }
-                    Globals.pCol.writeLog(0, "Output set to: " + state.ToString(), "");
+                    HandleError(err);
                 }
-                catch (Exception ex)
-                {
-                    Globals.pCol.writeLog(0, "Error while setting output: " + ex.ToString(), "");
-                }
-           // }
+                Globals.pCol.writeLog(0, "Output set to: " + state.ToString(), "");
+            }
+            catch (Exception ex)
+            {
+                Globals.pCol.writeLog(0, "Error while setting output: " + ex.ToString(), "");
+                //locker = null;
+            }
+            //}
         }
 
         public void HandleError(ErrorCode err)
@@ -270,7 +322,7 @@ namespace TKK_Application
             resetTimer.Stop();
             ScanStates();
             char[] newState = ChOutputStates_port0;
-          
+
             newState[4] = '1';
             setOutput(0, convertOutputToInt(newState));
             Console.WriteLine("Outputs reseted");
@@ -332,7 +384,7 @@ namespace TKK_Application
                 OutputStateCh0 = convertToString(portData);
                 #endregion
 
-                
+
             }
             catch
             {
@@ -389,7 +441,7 @@ namespace TKK_Application
             sep1StopTimer.Tick += new EventHandler(sep1DelayedStop);
             sep1StopTimer.Start();
         }
-        
+
         public void sep1DelayedStop(object sender, EventArgs e)
         {
             sep1StopTimer.Stop();
@@ -438,7 +490,7 @@ namespace TKK_Application
             sep2StopTimer = new Timer();
             sep2StopTimer.Interval = 800;
             sep2StopTimer.Tick += new EventHandler(sep2delayedStop);
-            sep2StopTimer.Start();          
+            sep2StopTimer.Start();
 
         }
 
@@ -480,7 +532,8 @@ namespace TKK_Application
                     Globals.pCol.writeLog(2, "Total stop pressed", "");
                 }
             }
-            catch {
+            catch
+            {
             }
         }
 
@@ -529,7 +582,7 @@ namespace TKK_Application
             {
                 Globals.pCol.writeLog(0, "Error occured while stoping motor from IOControl class", "");
             }
-       }
+        }
 
         //Ispuhivanje ON
         public void ispuhivanjeOn()
@@ -587,7 +640,7 @@ namespace TKK_Application
 
             //Transporter state
             if (ChStates_port0[3].Equals('1') && ChStates_port0[4].Equals('0'))
-            {            
+            {
                 statusArr[3] = "0";
             }
             else if (ChStates_port0[3].Equals('1') && ChStates_port0[4].Equals('1'))
@@ -624,7 +677,7 @@ namespace TKK_Application
                 statusArr[0] = "2";
             }
 
- 
+
             if (ChOutputStates_port0[7].Equals('1'))
             {
                 rotationDirection = "1";
@@ -639,12 +692,7 @@ namespace TKK_Application
             }
 
             #endregion Update
-            /*
-            if (ChStates_port1[3].Equals('1'))
-            {
 
-            }
-            */
             if (ChStates_port0[2].Equals('0'))
             {
                 TotalStop_Pressed = true;
@@ -656,28 +704,28 @@ namespace TKK_Application
 
             if (MotorRunning)
             {
-               refreshRotationCheck();
-               TotalStopCheck();
+                refreshRotationCheck();
+                TotalStopCheck();
             }
         }
 
         public void refreshRotationCheck()
         {
-  
+
             tickCount = tickCount + 1;
 
             if (tickCount >= 10)
             {
-               /* if (Belt_counter > Belt_counterOld)
-                {
-                    Console.WriteLine("Belt OK.");
-                }
-                else
-                {
-                    Console.WriteLine("Belt error.");
-                }
-                tickCount = 0;
-                */
+                /* if (Belt_counter > Belt_counterOld)
+                 {
+                     Console.WriteLine("Belt OK.");
+                 }
+                 else
+                 {
+                     Console.WriteLine("Belt error.");
+                 }
+                 tickCount = 0;
+                 */
             }
             Belt_counterOld = Belt_counter;
 
@@ -693,7 +741,7 @@ namespace TKK_Application
                 MessageBox.Show("Total stop pressed!!!", "Total stop");
                 stopMotor();
             }
-            else if(!TotalStop_Pressed)
+            else if (!TotalStop_Pressed)
             {
                 TotalStop_ACTIVE = false;
             }
@@ -792,8 +840,8 @@ namespace TKK_Application
         ~IOControl()
         {
             try
-            {              
-                stopTimer();               
+            {
+                stopTimer();
                 instantDiCtrl1.Dispose();
                 instantDoCtrl1.Dispose();
             }

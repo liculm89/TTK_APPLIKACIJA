@@ -329,10 +329,11 @@ namespace TKK_Application
             Globals.pCol.writeLog(0, "Auto mode stoped", operater);
             infomsg = new StopInfo("Gašenje transportera za : " + (Int32.Parse(Globals.stopTimerInt) / 1000).ToString() + " s", true);
             infomsg.Show();
-            Globals.IOCtrl.Belt_counter = 0;
-            Globals.IOCtrl.Belt_counterOld = 0;
+            //Globals.IOCtrl.Belt_counter = 0;
+            //Globals.IOCtrl.Belt_counterOld = 0;
 
         }
+
 
         private void MotorFWDbtn_Click(object sender, EventArgs e)
         {
